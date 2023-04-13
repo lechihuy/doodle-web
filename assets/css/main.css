@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Nunito";
+    src: url('/public/fonts/Nunito/Nunito-VariableFont_wght.ttf'),
+    url('/public/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf');
+}
+
+@layer base {
+    body {
+        @apply text-default-900 font-nunito antialiased
+    }
+}
+
+@layer components {
+    .form-text, .form-input, .form-textarea {
+        @apply rounded px-3 py-2 border-default-300 w-full text-default-900 placeholder:text-default-500
+        focus:border-primary-500 focus:ring-0
+    }
+
+    .form-select {
+        @apply rounded pl-3 pr-8 py-2 border-default-300 w-full text-default-900 placeholder:text-default-500
+        focus:border-primary-500 focus:ring-0
+    }
+
+    .form-file {
+        @apply file:px-3 file:py-2 file:bg-default-100 file:border-0 file:rounded-md file:cursor-pointer file:mr-3
+        hover:file:bg-default-200 hover:file:border-default-200
+    }
+
+    .form-help {
+        @apply text-xs text-default-500 font-light
+    }
+
+    .form-checkbox {
+        @apply w-5 h-5 border-gray-300 rounded text-primary-500
+        hover:cursor-pointer
+        focus:ring-primary-500
+        disabled:checked:bg-sky-200 disabled:cursor-not-allowed
+        disabled:bg-default-50
+    }
+
+    .form-label {
+        @apply font-semibold tracking-wider text-sm
+    }
+
+    .form-optional {
+        @apply font-light italic text-default-400
+    }
+
+    .btn {
+        @apply px-4 py-2 flex items-center justify-center rounded font-semibold gap-1 border cursor-pointer transition
+        hover:shadow-lg hover:shadow-inherit
+        focus:outline-none focus:shadow-lg focus:shadow-inherit
+        disabled:cursor-not-allowed
+    }
+
+    .btn-disabled {
+        @apply bg-default-50 text-default-300 border border-transparent
+        hover:shadow-none hover:translate-y-0 hover:shadow-inherit
+        focus:outline-none focus:shadow-none focus:shadow-inherit
+    }
+
+    .btn-sm {
+        @apply px-2.5 py-1.5 text-sm
+    }
+
+    .btn-block {
+        @apply w-full
+    }
+
+    .btn-default {
+        @apply bg-white text-default-500 border-default-200
+        hover:bg-default-200 hover:border-default-200 hover:shadow-none
+        focus-visible:bg-default-200
+    }
+
+    .btn-primary {
+        @apply bg-primary-500 text-white border-primary-500
+        hover:shadow-primary-500/30
+        focus:shadow-primary-500/30
+    }
+
+    .btn-success {
+        @apply bg-success-600 text-white border-success-600
+        hover:shadow-success-600/30
+        focus:shadow-success-600/30
+    }
+
+    .link-primary {
+        @apply text-primary-500
+        hover:text-primary-600
+        focus-visible:outline-primary-500
+    }
+
+    .link-disabled {
+        @apply text-default-300
+    }
+
+    .link-default {
+        @apply hover:underline
+        focus-visible:outline-default-900
+    }
+}
+
+.slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+}
