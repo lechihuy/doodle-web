@@ -16,7 +16,7 @@
 
 @layer components {
     .form-text, .form-input, .form-textarea {
-        @apply rounded px-3 py-2 border-default-300 w-full text-default-900 placeholder:text-default-500
+        @apply rounded-md px-3 py-2 border-default-300 w-full text-default-900 placeholder:text-default-500
         focus:border-primary-500 focus:ring-0
     }
 
@@ -51,10 +51,14 @@
     }
 
     .btn {
-        @apply px-4 py-2 flex items-center justify-center rounded font-semibold gap-1 border cursor-pointer transition
+        @apply px-3 py-2 flex items-center justify-center rounded-md font-semibold gap-1 border cursor-pointer transition
         hover:shadow-lg hover:shadow-inherit
         focus:outline-none focus:shadow-lg focus:shadow-inherit
         disabled:cursor-not-allowed
+    }
+
+    .btn-large {
+        @apply px-4 py-3
     }
 
     .btn-disabled {
@@ -83,6 +87,12 @@
         focus:shadow-primary-500/30
     }
 
+    .btn-transparent {
+        @apply bg-white/50 border-default-300
+        hover:bg-white/90 hover:border-default-500
+        focus:shadow-white/30
+    }
+
     .btn-success {
         @apply bg-success-600 text-white border-success-600
         hover:shadow-success-600/30
@@ -102,6 +112,11 @@
     .link-default {
         @apply hover:underline
         focus-visible:outline-default-900
+    }
+
+
+    .bg-grid-default-900 {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
     }
 }
 

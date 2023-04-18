@@ -4,10 +4,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: 'Doodle',
-      baseApiUrl: 'http://localhost:8000',
+      baseApiUrl: 'http://192.168.0.118:8000'
     },
   },
   modules: [
+    '@nuxt/image-edge',
     'nuxt-headlessui',
     'nuxt-icon',
     [
@@ -35,6 +36,6 @@ export default defineNuxtConfig({
       'constants',
       'layouts'
     ]
-  }
+  },
 })
   
