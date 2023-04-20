@@ -3,7 +3,9 @@ export { useToast } from '~/composables/store/toast'
 export {
   useLoginCustomerApi,
   useSendEmailVerificationApi,
-  useVerifyEmailApi
+  useVerifyEmailApi,
+  useResetCustomerPasswordApi,
+  useGetCustomerProfileApi
 } from '~/composables/repositories/authRepository'
 
 export {

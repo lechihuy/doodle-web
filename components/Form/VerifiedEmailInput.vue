@@ -3,7 +3,9 @@ const props = defineProps({
   id: { type: String, required: true },
   email: String,
   otpToken: String,
-  errorBag: { type: ErrorBag, default: null }
+  errorBag: { type: ErrorBag, default: null },
+  isUnique: { type: Boolean, default: false },
+  isExists: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['update:email', 'update:otp-token'])
@@ -38,9 +40,17 @@ function clearErrorBag() {
 }
 
 async function sendEmailVerification() {
+  const headerRules: any = {}
+
+  if (props.isUnique) {
+    headerRules['Require-Email-Unique'] = true
+  } else if (props.isExists) {
+    headerRules['Require-Email-Exists'] = true
+  }
+
   sendEmailVerificationLoading.value = true
 
-  await useSendEmailVerificationApi({ email: email.value }, { 'Require-Email-Unique': true })
+  await useSendEmailVerificationApi({ email: email.value }, headerRules)
     .then(res => {
       identifierToken.value = res.data.data.identifier_token
       resendVerificationTimer.value = res.data.data.expires * 60 // convert minutes to seconds

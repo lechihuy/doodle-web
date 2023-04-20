@@ -7,7 +7,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       if (error?.status === 401) {
         staff.value = null
         accessToken.value = null
-        navigateTo({ name: 'login' })
       }
   
       // @ts-ignore

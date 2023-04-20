@@ -20,6 +20,12 @@ declare global {
     gender?: number,
     password_confirmation?: string,
   }
+
+  type ResetCustomerPasswordData = {
+    email?: string,
+    new_password?: string,
+    new_password_confirmation?: string,
+  }
 }
 
 export const useLoginCustomerApi = (credentials: Credentials, headers: object = {}) => {
@@ -42,6 +48,16 @@ export const useRegisterCustomerApi = (data: RegisterCustomerData, headers: obje
   })
 }
 
+export const useResetCustomerPasswordApi = (data: ResetCustomerPasswordData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+
+  return $axios.post('public/auth/password/reset', data, {
+    headers: {
+      ...headers,
+    },
+  })
+}
+
 export const useSendEmailVerificationApi = (data: SendEmailVerificationData, headers: object = {}) => {
   const { $axios } = useNuxtApp()
 
@@ -57,6 +73,18 @@ export const useVerifyEmailApi = (data: VerifyEmailData, headers: object = {}) =
 
   return $axios.post('public/auth/email/verify', data, {
     headers: {
+      ...headers,
+    },
+  })
+}
+
+export const useGetCustomerProfileApi = (headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get('public/auth/profile', {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
       ...headers,
     },
   })

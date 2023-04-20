@@ -29,15 +29,20 @@ const { data: latestProducts } = await useAsyncData<any>('latestProducts',
       </svg>
     </div>
 
-    <div class="container mx-auto flex flex-col lg:flex-row gap-10">
-      <div class="order-last grow max-h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-20 relative xl:translate xl:-translate-y-[calc(theme(space.32)_-_theme(space.2))] xl:pt-32">
+    <div class="container mx-auto flex flex-col lg:flex-row gap-10 items-start">
+      <div class="order-last grow max-h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-10 relative xl:translate xl:-translate-y-[calc(theme(space.32)_-_theme(space.2))] xl:pt-32">
+        <div class="md:col-span-2 lg:col-span-1 xl:col-span-2 flex flex-col gap-3 xl:gap-6">
+          <h3 class="font-extrabold text-3xl xl:text-4xl">Lorem ipsum dolor sit amet.</h3>
+          <p class="text-default-700 leading-7 text-md xl:text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates in id recusandae omnis officiis laborum odit soluta aut et voluptatibus veniam at veritatis repudiandae provident, facilis sit rem velit facere!</p>
+        </div>
+        
         <div class="flex xl:flex-col items-start gap-6">
           <div class="rounded-lg border-2 border-primary-500 flex-none w-16 h-16 shadow-sm shadow-primary-500/[0.12] bg-primary-50 relative flex items-center justify-center">
             <Icon name="heroicons:archive-box" class="w-10 h-10 text-primary-500" />
           </div>
           <div class="flex flex-col gap-2 grow text-default-700 leading-6">
             <h3 class="font-extrabold text-xl xl:text-2xl">+1000 sản phẩm</h3>
-            <p class="leading-7">Cập nhật liên tục những mặt hàng mới theo thị trường cùng với số lượng nhập hoàng khổng lồ.</p>
+            <p class="text-default-700 leading-7">Cập nhật liên tục những mặt hàng mới theo thị trường cùng với số lượng nhập hoàng khổng lồ.</p>
           </div>
         </div>
 
@@ -47,7 +52,7 @@ const { data: latestProducts } = await useAsyncData<any>('latestProducts',
           </div>
           <div class="flex flex-col gap-2 grow text-default-700 leading-6">
             <h3 class="font-extrabold text-xl xl:text-2xl">+100 loại hàng hóa</h3>
-            <p class="leading-7">Đa dạng hóa những mặt hàng nhằm đáp ứng yêu cầu của khách hàng.</p>
+            <p class="text-default-700 leading-7">Đa dạng hóa những mặt hàng nhằm đáp ứng yêu cầu của khách hàng.</p>
           </div>
         </div>
 
@@ -57,7 +62,7 @@ const { data: latestProducts } = await useAsyncData<any>('latestProducts',
           </div>
           <div class="flex flex-col gap-2 grow text-default-700 leading-6">
             <h3 class="font-extrabold text-xl xl:text-2xl">Giá cả cạnh tranh</h3>
-            <p class="leading-7">Giá sản phẩm cạnh tranh thị trường, cam kết hoàn tiền và bù với số tiền chênh lệch.</p>
+            <p class="text-default-700 leading-7">Giá sản phẩm cạnh tranh thị trường, cam kết hoàn tiền và bù với số tiền chênh lệch.</p>
           </div>
         </div>
 
@@ -67,7 +72,7 @@ const { data: latestProducts } = await useAsyncData<any>('latestProducts',
           </div>
           <div class="flex flex-col gap-2 grow text-default-700 leading-6">
             <h3 class="font-extrabold text-xl xl:text-2xl">Nguồn gốc chất lượng</h3>
-            <p class="leading-7">Sản phẩm được nhập từ các nhà cung cấp uy tín hàng đầu Việt Nam.</p>
+            <p class="text-default-700 leading-7">Sản phẩm được nhập từ các nhà cung cấp uy tín hàng đầu Việt Nam.</p>
           </div>
         </div>
       </div>

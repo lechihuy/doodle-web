@@ -1,17 +1,12 @@
 export default defineNuxtRouteMiddleware(async () => {
   const accessToken = useCookie<string|null>('access_token')
-  const customer = useCurrentCustomer()
+  let customer = useCurrentCustomer()
   const currentCustomerRefreshed = useCurrentCustomerRefreshed()
 
-  if (!accessToken.value) {
-    return navigateTo({ name: 'login' })
-  }
-
-  if (!customer.value || currentCustomerRefreshed.value) {
-    //
-  }
-
-  if (!accessToken.value) {
-    return navigateTo({ name: 'login' })
+  if (accessToken.value && (!customer.value || currentCustomerRefreshed.value)) {
+    const { data } = useAsyncData('customer',
+      async () => (await useGetCustomerProfileApi()).data.data
+    )
+    customer.value = data
   }
 })

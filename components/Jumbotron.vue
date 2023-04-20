@@ -3,6 +3,8 @@
 const { data: randomProducts } = await useAsyncData<any>('randomProducts', 
   async () => (await useIndexProductLensApi(PRODUCT_LENS.random)).data.data
 )
+
+const currentCustomer = useCurrentCustomer()
 </script>
 
 <template>
@@ -24,9 +26,17 @@ const { data: randomProducts } = await useAsyncData<any>('randomProducts',
             Khám phá <span class="hidden xs:inline-block">sản phẩm</span> <Icon name="heroicons:arrow-right" class="w-4 h-4" />
           </NuxtLink>
 
-          <MagicButton>
+          <MagicButton v-if="currentCustomer">
             <NuxtLink
               class="btn btn-transparent btn-large flex-none"
+            >
+              <span class="hidden xs:inline-block">Đi tới hồ sơ</span> <span class="xs:hidden">Hồ sơ</span> <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+            </NuxtLink>
+          </MagicButton>
+          <MagicButton v-else>
+            <NuxtLink
+              class="btn btn-transparent btn-large flex-none"
+              :to="{ name: 'login' }"
             >
               <span class="hidden xs:inline-block">Trở thành khách hàng</span> <span class="xs:hidden">Khách hàng</span> <Icon name="heroicons:arrow-right" class="w-4 h-4" />
             </NuxtLink>

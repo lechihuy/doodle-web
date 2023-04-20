@@ -4,9 +4,8 @@ definePageMeta({
   middleware: ['guest']
 })
 
-useHead({ title: 'Đăng nhập Doodle' })
+useHead({ title: 'Đăng nhập' })
 
-const toast = useToast()
 const loginLoading = ref(false)
 const email = ref('')
 const password = ref('')

@@ -18,8 +18,6 @@ export default defineNuxtPlugin(() => {
     if (error.response.status === 401 && customer.value) {
       customer.value = null
       accessToken.value = null
-
-      navigateTo({ name: 'login' })
     }
 
     return Promise.reject(error);

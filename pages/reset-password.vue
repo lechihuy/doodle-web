@@ -4,37 +4,34 @@ definePageMeta({
   middleware: ['guest']
 })
 
-useHead({ title: 'Đăng ký tài khoản' })
+useHead({ title: 'Khôi phục mật khẩu' })
 
 const toast = useToast()
-const registerCustomerLoading = ref(false)
+const resetCustomerPasswordLoading = ref(false)
 const email = ref('')
-const fullName = ref('')
-const gender = ref(DEFAULT_GENDER.value)
-const password = ref('')
-const passswordConfirmation = ref('')
+const newPassword = ref('')
+const newPassswordConfirmation = ref('')
 const otpToken = ref('')
 const errorBag = useErrorBag()
 
 async function submit() {
-  registerCustomerLoading.value = true
+  resetCustomerPasswordLoading.value = true
 
-  await useRegisterCustomerApi({
+  await useResetCustomerPasswordApi({
     email: email.value,
-    full_name: fullName.value,
-    gender: gender.value,
-    password: password.value,
-    password_confirmation: passswordConfirmation.value,
+    new_password: newPassword.value,
+    new_password_confirmation: newPassswordConfirmation.value,
   }, { 'OTP-Token': otpToken.value })
-    .then(res => {
-      toast.success('Chào mừng bạn đã trở thành thành viên của Doodle!')
+    .then(() => {
+      toast.success('Khôi phục mật khẩu thành công, vui lòng đăng nhập lại!')
+      navigateTo({ name: 'login' })
     })
     .catch(err => {
       if (err.response.status === 419) otpToken.value = ''
 
       errorBag.errors.value = err.response.data.errors
     })
-    .finally(() => setTimeout(() => registerCustomerLoading.value = false, 200))
+    .finally(() => setTimeout(() => resetCustomerPasswordLoading.value = false, 200))
 }
 
 </script>
@@ -52,7 +49,7 @@ async function submit() {
       </NuxtLink>
 
       <form action="/login" class="w-full max-w-sm flex flex-col gap-5 p-7 bg-white rounded-xl shadow-xl ring-1 ring-default-900/10" @submit.prevent="submit">
-        <h1 class="text-lg text-center tracking-wide font-semibold text-default-700">Đăng ký tài khoản</h1>
+        <h1 class="text-lg text-center tracking-wide font-semibold text-default-700">Khôi phục mật khẩu</h1>
         
         <div class="flex flex-col gap-1">
           <label for="email" class="block text-sm font-semibold leading-6">Địa chỉ e-mail</label>
@@ -61,50 +58,32 @@ async function submit() {
             :error-bag="errorBag"
             v-model:email="email"
             v-model:otp-token="otpToken"
-            :is-unique="true"
+            :is-exists="true"
           />
         </div>
-
+      
         <div class="flex flex-col gap-1">
-          <label for="full_name" class="block text-sm font-semibold leading-6">Họ tên</label>
-          <FormTextInput
-            id="full_name" 
-            v-model="fullName"
-            :error-bag="errorBag"
-          />
-        </div>
-
-        <div class="flex flex-col gap-1">
-          <label for="gender" class="block text-sm font-semibold leading-6">Giới tính</label>
-          <FormGenderInput
-            id="gender"
-            v-model="gender"
-            :error-bag="errorBag"
-          />
-        </div>
-
-        <div class="flex flex-col gap-1">
-          <label for="password" class="block text-sm font-semibold leading-6 text-gray-900">Mật khẩu</label>
+          <label for="new_password" class="block text-sm font-semibold leading-6 text-gray-900">Mật khẩu mới</label>
           <FormPasswordInput
-            id="password" 
-            v-model="password"
+            id="new_password" 
+            v-model="newPassword"
             :error-bag="errorBag"
           />
         </div>
 
         <div class="flex flex-col gap-1">
-          <label for="password_confirmation" class="block text-sm font-semibold leading-6 text-gray-900">Nhập lại mật khẩu</label>
+          <label for="new_password_confirmation" class="block text-sm font-semibold leading-6 text-gray-900">Nhập lại mật khẩu mới</label>
           <FormPasswordInput
-            id="password_confirmation" 
-            v-model="passswordConfirmation"
+            id="new_password_confirmation" 
+            v-model="newPassswordConfirmation"
             :error-bag="errorBag"
           />
         </div>
 
         <MagicButton>
           <button type="submit" class="btn bg-default-900 btn-large text-white btn-block">
-            <IconLoading v-show="registerCustomerLoading" />
-            Tạo tài khoản
+            <IconLoading v-show="resetCustomerPasswordLoading" />
+            Khôi phục
           </button>
         </MagicButton>
 
