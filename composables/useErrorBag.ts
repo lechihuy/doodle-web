@@ -21,6 +21,10 @@ export class ErrorBag
     })
   }
 
+  clearAll() {
+    this.errors.value = {}
+  }
+
   get(key: string) {
     return _.flatten(_.filter(this.errors.value, (errors, errorKey) => {
       return errorKey.match(new RegExp('^' + key));

@@ -24,7 +24,7 @@ const styles = computed(() => CONTEXTS[toast.context as ContextKeys])
 <template>
   <Transition name="slide-fade">
     <div
-      class="fixed top-3 right-3 max-w-sm p-3 rounded-lg flex items-center shadow-lg gap-3 text-sm"
+      class="fixed top-20 right-3 max-w-sm p-3 rounded-lg flex items-center shadow-lg gap-3 text-sm"
       :style="{ zIndex: zIndex.toast }"
       v-show="toast.shown"
       :class="styles.container.class"

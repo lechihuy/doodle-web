@@ -26,6 +26,17 @@ declare global {
     new_password?: string,
     new_password_confirmation?: string,
   }
+
+  type ChangeCustomerPasswordData = {
+    password?: string,
+    new_password?: string,
+    new_password_confirmation?: string,
+  }
+
+  type ProfileData = {
+    full_name?: string,
+    gender?: number,
+  }
 }
 
 export const useLoginCustomerApi = (credentials: Credentials, headers: object = {}) => {
@@ -33,6 +44,18 @@ export const useLoginCustomerApi = (credentials: Credentials, headers: object = 
 
   return $axios.post('public/auth/login', credentials, {
     headers: {
+      ...headers,
+    },
+  })
+}
+
+export const useLogoutCustomerApi = (headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.post('public/auth/logout', {}, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
       ...headers,
     },
   })
@@ -83,6 +106,30 @@ export const useGetCustomerProfileApi = (headers: object = {}) => {
   const accessToken = useCookie<string|null>('access_token')
 
   return $axios.get('public/auth/profile', {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useEditProfileApi = (data: ProfileData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.put('public/auth/profile', data, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useChangeCustomerPasswordApi = (data: ChangeCustomerPasswordData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.put('public/auth/password/change', data, {
     headers: {
       Authorization: `Bearer ${accessToken.value}`,
       ...headers,

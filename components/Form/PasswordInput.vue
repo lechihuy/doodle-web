@@ -13,7 +13,7 @@ const password = computed({
 })
 
 function clearErrorBag() {
-  props.errorBag?.clear(props.id)
+  props.errorBag?.clear(props.id.replace('_confirmation', ''))
 }
 </script>
 
@@ -22,7 +22,7 @@ function clearErrorBag() {
     <input
       :id="id"
       type="password" 
-      class="form-input "
+      class="form-input"
       v-model="password"
       :class="{ 
         'border-danger-500': errorBag.get(id)?.length > 0,

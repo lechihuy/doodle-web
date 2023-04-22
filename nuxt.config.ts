@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: 'Doodle',
-      baseApiUrl: 'http://192.168.1.3:8000'
+      baseApiUrl: 'http://127.0.0.1:8000'
     },
   },
   modules: [

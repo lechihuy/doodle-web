@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 definePageMeta({
   layout: 'default',
-  middleware: ['auth']
+  middleware: ['optional-auth']
 })
 
 useHead({ title: 'Mở rộng thế giới mua sắm của bạn' })

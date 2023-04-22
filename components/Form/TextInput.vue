@@ -2,7 +2,8 @@
 const props = defineProps({
   id: { type: String, required: true },
   modelValue: String,
-  errorBag: { type: ErrorBag, default: null }
+  errorBag: { type: ErrorBag, default: useErrorBag() },
+  disabled: { type: Boolean, default: false, }
 })
 
 const emit = defineEmits(['update:model-value'])
@@ -25,13 +26,14 @@ function clearErrorBag() {
       class="form-input "
       v-model="text"
       :class="{ 
-        'border-danger-500': errorBag.get(id)?.length > 0,
+        'border-danger-500': errorBag && errorBag.get(id)?.length > 0,
       }"
       @input="clearErrorBag"
+      :disabled="disabled"
     />
 
     <div v-show="errorBag && errorBag.get(id)?.length > 0" class="text-sm text-danger-500 flex flex-col gap-1">
-      <small v-for="(error, index) in props.errorBag.get(props.id)" :key="index">&bull; {{ error }}</small>
+      <small v-for="(error, index) in errorBag.get(props.id)" :key="index">&bull; {{ error }}</small>
     </div>
   </div>
 </template>

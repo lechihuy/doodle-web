@@ -16,7 +16,7 @@
 
 @layer components {
     .form-text, .form-input, .form-textarea {
-        @apply rounded-md px-3 py-2 border-default-300 w-full text-default-900 placeholder:text-default-500
+        @apply rounded-md px-3 py-2 border-default-300 w-full !bg-white text-default-900 placeholder:text-default-500
         focus:border-primary-500 focus:ring-0
     }
 

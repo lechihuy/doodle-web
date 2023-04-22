@@ -5,7 +5,11 @@ export {
   useSendEmailVerificationApi,
   useVerifyEmailApi,
   useResetCustomerPasswordApi,
-  useGetCustomerProfileApi
+  useGetCustomerProfileApi,
+  useLogoutCustomerApi,
+  useRegisterCustomerApi,
+  useEditProfileApi,
+  useChangeCustomerPasswordApi
 } from '~/composables/repositories/authRepository'
 
 export {

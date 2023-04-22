@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useRegisterCustomerApi } from "~/composables"
+
 definePageMeta({
   layout: 'blank',
   middleware: ['guest']
