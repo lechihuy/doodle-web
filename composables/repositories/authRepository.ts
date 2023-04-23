@@ -37,6 +37,46 @@ declare global {
     full_name?: string,
     gender?: number,
   }
+
+  type AddressCreationData = {
+    name?: string,
+    description?: string,
+    province_id?: string|Number,
+    district_id?: string|Number,
+    ward_id?: string|Number,
+    street_name?: string,
+    street_number?: string,
+    coordinates?: {
+      lat?: string|number,
+      lng?: string|number
+    },
+    contact: {
+      full_name?: string,
+      phone_number?: string,
+    }
+  }
+
+  type AddressEditData = {
+    name?: string,
+    description?: string,
+    province_id?: string|Number,
+    district_id?: string|Number,
+    ward_id?: string|Number,
+    street_name?: string,
+    street_number?: string,
+    coordinates?: {
+      lat?: string|number,
+      lng?: string|number
+    },
+    contact: {
+      full_name?: string,
+      phone_number?: string,
+    }
+  }
+
+  type AddressFilter = {
+    limit?: number,
+  }
 }
 
 export const useLoginCustomerApi = (credentials: Credentials, headers: object = {}) => {
@@ -130,6 +170,85 @@ export const useChangeCustomerPasswordApi = (data: ChangeCustomerPasswordData, h
   const accessToken = useCookie<string|null>('access_token')
 
   return $axios.put('public/auth/password/change', data, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+// Address
+export const useIndexAddressApi = (filter?: AddressFilter, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get('public/auth/addresses', {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+    params: {
+      ...filter
+    }
+  })
+}
+
+export const useCountAddressMetricApi = (metric: string, filter?: AddressFilter, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get(`public/auth/addresses/metrics/${metric}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+    params: {
+      ...filter
+    }
+  })
+}
+
+export const useDetailAddressApi = (id: string, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get(`public/auth/addresses/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useCreateAddressApi = (data: AddressCreationData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.post(`public/auth/addresses/`, data, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useEditAddressApi = (id: string, data: AddressEditData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.put(`public/auth/addresses/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useDestroyAddressApi = (id: string, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.delete(`public/auth/addresses/${id}`, {
     headers: {
       Authorization: `Bearer ${accessToken.value}`,
       ...headers,

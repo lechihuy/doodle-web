@@ -32,6 +32,7 @@ function navigate(to: any) {
           >
             <HeadlessMenuItems
               class="absolute divide-y divide-default-100 left-0 mt-2 w-52 origin-top-left rounded-md bg-white shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+              :style="{ zIndex: zIndex.dropdown }"
             >
               <div class="py-1.5">
                 <HeadlessMenuItem v-slot="{ active }">
@@ -99,7 +100,7 @@ function navigate(to: any) {
           </transition>
         </HeadlessMenu>
 
-        <nav class="lg:flex-col gap-1 hidden lg:flex">
+        <nav class="lg:flex-col gap-1 hidden lg:flex sticky top-24">
           <NuxtLink 
             class="px-3 py-2 hover:bg-default-100 rounded-md font-semibold flex items-center gap-2 cursor-pointer"
             :class="{ '!bg-primary-500 !text-white': route.name === 'profile' }"

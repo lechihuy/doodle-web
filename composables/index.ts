@@ -9,8 +9,22 @@ export {
   useLogoutCustomerApi,
   useRegisterCustomerApi,
   useEditProfileApi,
-  useChangeCustomerPasswordApi
+  useChangeCustomerPasswordApi,
+  useCountAddressMetricApi,
+  useIndexAddressApi,
+  useCreateAddressApi,
+  useEditAddressApi,
+  useDetailAddressApi,
+  useDestroyAddressApi
 } from '~/composables/repositories/authRepository'
+
+export {
+  useIndexProvinceApi,
+  useIndexDistrictApi,
+  useIndexWardApi,
+  useIndexGeocodesApi,
+  useCalculateDistanceApi
+} from '~/composables/repositories/addressRepository'
 
 export {
   useIndexProductLensApi,
