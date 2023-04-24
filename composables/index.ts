@@ -1,4 +1,5 @@
 export { useToast } from '~/composables/store/toast'
+export { useActionConfirmationModal } from '~/composables/store/action-confirmation-modal'
 
 export {
   useLoginCustomerApi,

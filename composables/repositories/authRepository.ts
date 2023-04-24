@@ -46,10 +46,8 @@ declare global {
     ward_id?: string|Number,
     street_name?: string,
     street_number?: string,
-    coordinates?: {
-      lat?: string|number,
-      lng?: string|number
-    },
+    lat?: string|number,
+    lng?: string|number,
     contact: {
       full_name?: string,
       phone_number?: string,
@@ -64,10 +62,8 @@ declare global {
     ward_id?: string|Number,
     street_name?: string,
     street_number?: string,
-    coordinates?: {
-      lat?: string|number,
-      lng?: string|number
-    },
+    lat?: string|number,
+    lng?: string|number,
     contact: {
       full_name?: string,
       phone_number?: string,

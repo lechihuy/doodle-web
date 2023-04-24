@@ -3,8 +3,8 @@ const props = defineProps({
   id: { type: String, required: true },
   errorBag: { type: ErrorBag, default: useErrorBag() },
   modelValue: Object,
-  latInputId: String,
-  lngInputId: String,
+  latInputId: { type: String, required: true },
+  lngInputId: { type: String, required: true },
   address: Object,
 })
 const emit = defineEmits(['update:model-value'])
@@ -57,7 +57,7 @@ function selectGeocode(geocode: any) {
         type="text"
         class="form-input"
         placeholder="Vĩ độ"
-        :class="{ 'border-danger-500 focus:border-danger-500': props.errorBag.get(id + '.lat').length }"
+        :class="{ 'border-danger-500 focus:border-danger-500': props.errorBag.get(latInputId).length }"
         v-model="coordinates.lat"
         @paste="determineCoordinatesFromClipBoard"
       />
@@ -65,7 +65,7 @@ function selectGeocode(geocode: any) {
         type="text"
         class="form-input"
         placeholder="Kinh độ"
-        :class="{ 'border-danger-500 focus:border-danger-500': props.errorBag.get(id + '.lng').length }"
+        :class="{ 'border-danger-500 focus:border-danger-500': props.errorBag.get(lngInputId).length }"
         v-model="coordinates.lng"
         @paste="determineCoordinatesFromClipBoard"
       />
@@ -114,12 +114,16 @@ function selectGeocode(geocode: any) {
 
     </div>
 
-    <div class="relative w-full h-72 sm:h-96 z-[1] mt-2 rounded-lg overflow-hidden" v-if="coordinates.lat && coordinates.lng">
+    <div class="relative w-full h-72 sm:h-96 mt-2 rounded-lg overflow-hidden" v-if="coordinates.lat && coordinates.lng">
       <FormMapInput class="h-full" v-model="coordinates" />
     </div>
 
-    <div v-if="props.errorBag.get(id)" class="text-sm text-danger-500 flex flex-col gap-1">
-      <small v-for="(error, index) in props.errorBag.get(id)" :key="index">&bull; {{ error }}</small>
+    <div v-if="props.errorBag.get(id) || props.errorBag.get(latInputId) || props.errorBag.get(lngInputId)" class="text-sm text-danger-500 flex flex-col gap-1">
+      <small v-for="(error, index) in [
+        ...props.errorBag.get(id),
+        ...props.errorBag.get(latInputId),
+        ...props.errorBag.get(lngInputId)
+      ]" :key="index">&bull; {{ error }}</small>
     </div>
   </div>
 </template>

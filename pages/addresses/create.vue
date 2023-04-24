@@ -40,10 +40,8 @@ async function submitCreateAddress() {
     ward_id: ward.value?.id,
     street_name: streetName.value,
     street_number: streetNumber.value,
-    coordinates: {
-      lat: coordinates.value.lat,
-      lng: coordinates.value.lng
-    },
+    lat: coordinates.value.lat,
+    lng: coordinates.value.lng,
     contact: {
       full_name: fullName.value,
       phone_number: phoneNumber.value,
@@ -63,7 +61,12 @@ async function submitCreateAddress() {
 
 <template>
   <div class="w-full lg:max-w-2xl mx-auto">
-    <h1 class="text-2xl font-light">Thêm địa chỉ mới</h1>
+    <h1 class="text-2xl font-light flex items-center gap-2">
+      <NuxtLink :to="{ name: 'addresses' }" class="w-8 h-8 rounded-full border border-default-500 flex items-center justify-center">
+        <Icon name="heroicons:chevron-left" class="w-5 h-5" />
+      </NuxtLink>
+      Thêm địa chỉ mới
+    </h1>
 
     <form method="PUT" @submit.prevent="submitCreateAddress">
       <div class="divide-y divide-default-500/10 mt-7">

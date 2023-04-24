@@ -31,7 +31,7 @@ const { data: addresses } = await useAsyncData<any>('addresses',
         >
           <div class="flex flex-col gap-1">
             <div>
-              <NuxtLink class="link-primary font-bold">
+              <NuxtLink :to="{ name: 'addresses-id', params: { id: address.id } }" class="link-primary font-bold">
                 {{ address.name }}
               </NuxtLink>
             </div>
@@ -40,7 +40,7 @@ const { data: addresses } = await useAsyncData<any>('addresses',
           <div class="flex items-center gap-5 ml-auto">
             <Icon name="heroicons:star" class="w-6 h-6 text-default-500 hover:text-default-900" />
 
-            <NuxtLink>
+            <NuxtLink :to="{ name: 'addresses-id-edit', params: { id: address.id } }">
               <Icon name="heroicons:pencil-square" class="w-6 h-6 text-default-500 hover:text-default-900" />
             </NuxtLink>
           </div>
