@@ -16,7 +16,11 @@ export {
   useCreateAddressApi,
   useEditAddressApi,
   useDetailAddressApi,
-  useDestroyAddressApi
+  useDestroyAddressApi,
+  useCountOrderMetricApi,
+  useIndexOrdersApi,
+  useDetailOrderApi,
+  useCancelOrderApi
 } from '~/composables/repositories/authRepository'
 
 export {

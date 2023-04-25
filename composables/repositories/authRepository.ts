@@ -73,6 +73,11 @@ declare global {
   type AddressFilter = {
     limit?: number,
   }
+
+  type OrderFilter = {
+    status?: string
+    page?: number,
+  }
 }
 
 export const useLoginCustomerApi = (credentials: Credentials, headers: object = {}) => {
@@ -245,6 +250,58 @@ export const useDestroyAddressApi = (id: string, headers: object = {}) => {
   const accessToken = useCookie<string|null>('access_token')
 
   return $axios.delete(`public/auth/addresses/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+// Order
+export const useCountOrderMetricApi = (metric: string, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get(`public/auth/orders/metrics/${metric}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useIndexOrdersApi = (filter?: OrderFilter, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get(`public/auth/orders`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+    params: {
+      ...filter
+    }
+  })
+}
+
+export const useDetailOrderApi = (id: string|number, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get(`public/auth/orders/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useCancelOrderApi = (id: string|number, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.put(`public/auth/orders/${id}/cancel`, {
     headers: {
       Authorization: `Bearer ${accessToken.value}`,
       ...headers,
