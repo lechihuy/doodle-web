@@ -75,6 +75,7 @@ declare global {
   }
 
   type OrderFilter = {
+    keyword?: string,
     status?: string
     page?: number,
   }
@@ -258,7 +259,7 @@ export const useDestroyAddressApi = (id: string, headers: object = {}) => {
 }
 
 // Order
-export const useCountOrderMetricApi = (metric: string, headers: object = {}) => {
+export const useCountOrderMetricApi = (metric: string, filter?: OrderFilter, headers: object = {}) => {
   const { $axios } = useNuxtApp()
   const accessToken = useCookie<string|null>('access_token')
 
@@ -267,6 +268,9 @@ export const useCountOrderMetricApi = (metric: string, headers: object = {}) => 
       Authorization: `Bearer ${accessToken.value}`,
       ...headers,
     },
+    params: {
+      ...filter,
+    }
   })
 }
 
@@ -301,7 +305,7 @@ export const useCancelOrderApi = (id: string|number, headers: object = {}) => {
   const { $axios } = useNuxtApp()
   const accessToken = useCookie<string|null>('access_token')
 
-  return $axios.put(`public/auth/orders/${id}/cancel`, {
+  return $axios.put(`public/auth/orders/${id}/cancel`, {}, {
     headers: {
       Authorization: `Bearer ${accessToken.value}`,
       ...headers,

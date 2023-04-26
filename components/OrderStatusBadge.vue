@@ -6,7 +6,7 @@ const props = defineProps({
 
 <template>
   <span
-    class="inline-block font-semibold text-xs px-2 py-1 rounded-full bg-default-100"
+    class="inline-block font-semibold text-xs px-1.5 py-0.5 rounded-full bg-default-100"
     :class="{
       '!bg-success-100 !text-success-900': status === 'accepted',
       '!bg-primary-100 !text-primary-900': status === 'preparing',
