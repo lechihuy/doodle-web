@@ -6,6 +6,8 @@ definePageMeta({
 
 useHead({ title: 'Sổ địa chỉ' })
 
+const currentCustomer = useCurrentCustomer()
+
 const { data: total } = await useAsyncData<any>('total',
   async () => (await useCountAddressMetricApi('total')).data.data.value
 )
@@ -13,6 +15,11 @@ const { data: total } = await useAsyncData<any>('total',
 const { data: addresses } = await useAsyncData<any>('addresses',
   async () => (await useIndexAddressApi({ limit: 5 })).data.data 
 )
+
+async function setDefaultAddress(id: string) {
+  await useSetDefaultAddressApi(id)
+  currentCustomer.value!.default_address_id = id
+}
 </script>
 
 <template>
@@ -38,7 +45,8 @@ const { data: addresses } = await useAsyncData<any>('addresses',
             <p class="text-sm text-default-700">{{ address.shortcut_full_address }}</p>
           </div>
           <div class="flex items-center gap-5 ml-auto">
-            <Icon name="heroicons:star" class="w-6 h-6 text-default-500 hover:text-default-900" />
+            <Icon name="heroicons:star" @click="setDefaultAddress(address.id)" v-if="currentCustomer?.default_address_id !== address.id" class="cursor-pointer w-6 h-6 text-default-500 hover:text-default-900" />
+            <Icon name="heroicons:star-solid" @click="setDefaultAddress(address.id)" v-else class="w-6 h-6 text-yellow-500 cursor-pointer" />
 
             <NuxtLink :to="{ name: 'addresses-id-edit', params: { id: address.id } }">
               <Icon name="heroicons:pencil-square" class="w-6 h-6 text-default-500 hover:text-default-900" />

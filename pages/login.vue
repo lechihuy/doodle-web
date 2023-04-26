@@ -71,7 +71,7 @@ async function submit() {
           Đăng nhập
         </button>
         <p class="text-default-700 mt-6 text-center">
-          <a href="" class="hover:underline hover:text-default-900">Quên mật khẩu?</a>
+          <NuxtLink :to="{ name: 'reset-password' }" class="hover:underline hover:text-default-900">Quên mật khẩu?</NuxtLink>
         </p>
       </form>
     </div>

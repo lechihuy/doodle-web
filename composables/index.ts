@@ -20,7 +20,8 @@ export {
   useCountOrderMetricApi,
   useIndexOrdersApi,
   useDetailOrderApi,
-  useCancelOrderApi
+  useCancelOrderApi,
+  useSetDefaultAddressApi
 } from '~/composables/repositories/authRepository'
 
 export {

@@ -258,6 +258,18 @@ export const useDestroyAddressApi = (id: string, headers: object = {}) => {
   })
 }
 
+export const useSetDefaultAddressApi = (id: string, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.put(`public/auth/addresses/${id}/set-default`, {}, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
 // Order
 export const useCountOrderMetricApi = (metric: string, filter?: OrderFilter, headers: object = {}) => {
   const { $axios } = useNuxtApp()
