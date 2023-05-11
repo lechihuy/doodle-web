@@ -61,6 +61,7 @@ async function submitEditAddress() {
   })
     .then(res => {
       toast.success('Đã cập nhật địa chỉ thành công!')
+      refreshNuxtData('addresses')
       navigateTo({ name: 'addresses' })
     })
     .catch(err => {

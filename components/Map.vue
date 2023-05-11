@@ -31,7 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="!hasError" ref="mapContainer" class="w-full"></div>
+  <div v-if="!hasError" ref="mapContainer" class="w-full !z-0"></div>
   <div v-else class="w-full flex items-center justify-center bg-default-100">
     <div class="w-96 max-w-full flex flex-col justify-center items-center gap-2 text-default-500">
       <Icon name="heroicons:exclamation-circle" class="w-10 h-10" />

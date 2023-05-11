@@ -36,7 +36,7 @@ function blurInputPage() {
 }
 
 function goToPage() {
-  if (props.filter!.page === props.meta!.current_page) return
+  // if (props.filter!.page === props.meta!.current_page) return
   props.filter!.page = input.value.innerText
 }
 </script>

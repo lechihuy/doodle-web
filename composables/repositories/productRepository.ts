@@ -1,10 +1,16 @@
 declare global {
   type ProductFilter = {
+    keyword?: string,
+    page?: number,
+    per_page?: number,
     limit?: number,
+    product_group_id?: number,
+    brand_id?: number,
   }
 
   type ProductSorter = {
-    created_at?: string
+    created_at?: string,
+    sale_price?: string|null
   }
 }
 

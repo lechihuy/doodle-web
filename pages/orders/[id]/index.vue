@@ -23,16 +23,16 @@ fetchRealtimeOrderTracking(order.value.code, (snapshot: any) => {
   refreshNuxtData("order");
 });
 
-async function cancelOrder(order: any) {
+async function cancelOrder() {
   const modal = useActionConfirmationModal();
   modal.open({
     title: "Xác nhận hủy đơn",
     body: "Hành động này không thể hoàn tác, bạn có chắc chắn muốn thực hiện?",
   });
   modal.onAccepted = () => {
-    useCancelOrderApi(order.id)
+    useCancelOrderApi(order.value.id)
       .then(() => {
-        changeRealtimeOrderTracking(order.code, "canceled");
+        changeRealtimeOrderTracking(order.value.code, "canceled");
         toast.success("Hủy đơn hàng thành công!");
       })
       .catch((err) => toast.error("Đã có lỗi xảy ra, vui lòng thử lại sau."));
@@ -84,6 +84,7 @@ async function cancelOrder(order: any) {
             />
           </div>
         </div>
+        <button type="button" v-if="order.cancelable" class="btn btn-transparent bg-white mt-7" @click="cancelOrder">Hủy đơn hàng</button>
       </div>
       <div class="py-7 flex flex-col gap-2">
         <label class="font-semibold">Chi nhánh</label>
@@ -107,6 +108,12 @@ async function cancelOrder(order: any) {
       <div class="py-7 flex flex-col gap-2">
         <label class="font-semibold">Địa chỉ nhận hàng</label>
         <p>{{ order.address_data.full_address }}</p>
+        <div class="relative w-full h-72 sm:h-96 z-[1] rounded-lg overflow-hidden" v-if="order.address_data.lat && order.address_data.lng">
+          <Map :coordinates="{
+            lat: order.address_data.lat,
+            lng: order.address_data.lng
+          }" class="h-full" />
+        </div>  
       </div>
       <div class="py-7 flex flex-col gap-2">
         <label class="font-semibold">Đơn hàng</label>

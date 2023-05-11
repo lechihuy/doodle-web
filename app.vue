@@ -11,13 +11,17 @@ useHead({
     { rel: 'apple-touch-icon', href: '/images/doodle.ico', sizes: '512x512' }
   ]
 })
+
+const currentCustomer = useCurrentCustomer()
 </script>
 
 <template>
   <NuxtLayout>
     <NuxtPage :key="$route.fullPath" />
-  </NuxtLayout>
 
-  <Toast />
-  <ActionConfirmationModal />
+    <Toast />
+    <ActionConfirmationModal />
+    <MustBeLoginModal v-if="!currentCustomer" />
+    <NotEnoughStockModal v-if="currentCustomer" />
+  </NuxtLayout>
 </template>

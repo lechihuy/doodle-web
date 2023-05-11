@@ -4,7 +4,7 @@ definePageMeta({
   middleware: ['guest']
 })
 
-useHead({ title: 'Đăng nhập' })
+useHead({ title: 'Đăng nhập tài khoản khách hàng' })
 
 const loginLoading = ref(false)
 const email = ref('')
@@ -45,7 +45,7 @@ async function submit() {
         <span class="text-2xl font-mono font-semibold text-default-700">Doodle</span>
       </NuxtLink>
 
-      <h1 class="sr-only">Đăng nhập Doodle</h1>
+      <h1 class="font-semibold tracking-wider text-lg mb-7">Đăng nhập tài khoản khách hàng</h1>
       <form action="/login" class="w-full max-w-sm flex flex-col gap-6" @submit.prevent="submit">
         <div class="bg-danger-100 shadow-sm rounded text-danger-900 px-5 py-3 mb-5" v-show="error">{{ error }}</div>
         <div class="flex flex-col gap-1">

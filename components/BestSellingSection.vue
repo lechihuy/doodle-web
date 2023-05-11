@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data: bestSellingProducts } = await useAsyncData<any>('bestSellingProducts', 
+const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellingProducts', 
   async () => (await useIndexProductLensApi(PRODUCT_LENS.bestSeller)).data.data
 )
 </script>
@@ -12,28 +12,8 @@ const { data: bestSellingProducts } = await useAsyncData<any>('bestSellingProduc
       <span>Sản phẩm bán chạy</span>
     </h3>
 
-    <p class="max-w-3xl space-y-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor aliquid molestias animi fugiat unde suscipit in officiis veritatis? Modi culpa at animi sint aspernatur sequi voluptas architecto amet cumque vitae!</p>
-
     <div class="flex justify-center">
       <div class="grid items-strech gap-7 grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
-        <ProductVerticalItem
-          v-for="product in bestSellingProducts"
-          class=" flex-none"
-          :key="product.id"
-          :id="product.id"
-          :thumbnail="product.thumbnail?.url"
-          :name="product.name"
-          :sale-price="product.sale_price"
-        />
-        <ProductVerticalItem
-          v-for="product in bestSellingProducts"
-          class=" flex-none"
-          :key="product.id"
-          :id="product.id"
-          :thumbnail="product.thumbnail?.url"
-          :name="product.name"
-          :sale-price="product.sale_price"
-        />
         <ProductVerticalItem
           v-for="product in bestSellingProducts"
           class=" flex-none"

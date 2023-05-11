@@ -7,5 +7,11 @@ export default defineNuxtRouteMiddleware(async () => {
       async () => (await useGetCustomerProfileApi()).data.data
     )
     customer.value = data.value
+
+    if (data.value) {
+      customer.value = data.value
+    } else {
+      accessToken.value = null
+    }
   }
 })

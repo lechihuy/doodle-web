@@ -4,3 +4,7 @@ export const currency = (number: number|string) => {
     currency: 'VND',
   }).format(number as unknown as number)
 }
+
+export const distance = (number: number|string) => {
+  return (parseInt(number) / 1000).toFixed(2) + ' km'
+}

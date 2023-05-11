@@ -63,7 +63,7 @@ const currentCustomer = useCurrentCustomer();
         </div>
       </div>
 
-      <div class="flex-col flex relative self-center overflow-hidden">
+      <!-- <div class="flex-col flex relative self-center overflow-hidden">
         <div class="relative py-2.5">
           <div
             class="absolute inset-x-0 top-0 h-px bg-default-500/20 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"
@@ -103,10 +103,10 @@ const currentCustomer = useCurrentCustomer();
             </div>
           </Marquee>
         </div>
-      </div>
+      </div> -->
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 container mx-auto px-3">
+    <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 container mx-auto px-3">
       <div class="flex items-start gap-6">
         <div
           class="rounded-lg border-2 border-primary-500 flex-none w-12 shadow-sm shadow-primary-500/[0.12] h-12 bg-primary-50 relative flex items-center justify-center"
@@ -151,7 +151,7 @@ const currentCustomer = useCurrentCustomer();
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

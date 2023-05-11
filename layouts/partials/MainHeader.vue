@@ -10,6 +10,14 @@ onMounted(() => {
 const route = useRoute();
 const currentCustomer = useCurrentCustomer();
 const accessToken = useCookie<string | undefined>("access_token");
+const searchShown = ref(false)
+const cart = useCart()
+
+if (currentCustomer.value) {
+  cart.loading = true
+  await cart.fetch()
+  cart.loading = false
+}
 
 async function logout() {
   await useLogoutCustomerApi();
@@ -52,30 +60,56 @@ async function logout() {
           class="inline-flex items-center gap-2"
         >
           <Logo />
-          <span class="text-xl font-mono font-semibold text-default-700"
-            >Doodle</span
-          >
+          <span class="text-xl hidden sm:inline-block font-mono font-semibold text-default-700">Doodle</span>
         </NuxtLink>
 
-        <!-- <div class="relative">
-          <button type="button" class="btn py-2 btn-transparent text-default-500 gap-3">
-            <Icon name="heroicons:magnifying-glass" class="w-5 h-5" /> Tìm kiếm sản phẩm...
-            <Shortcut class="text-sm text-default-300" value="^ K" />
+        <div class="relative hidden xl:block">
+          <button type="button" class="btn py-2 btn-transparent text-default-500 gap-3" @click="searchShown = true">
+            <Icon name="heroicons:magnifying-glass" class="w-5 h-5" /> Tìm kiếm sản phẩm, thương hiệu...
           </button>
-        </div> -->
+        </div>
       </div>
 
-      <div class="ml-auto flex items-center justify-end gap-7">
-        <div class="flex items-center gap-5"></div>
+      <div class="ml-auto flex items-center justify-end gap-5 sm:gap-7">
+        <div class="flex items-center gap-5 sm:gap-7">
+          <a class="block xl:hidden cursor-pointer">
+            <Icon name="heroicons:magnifying-glass" class="w-6 h-6 hover:text-primary-500" @click="searchShown = true" />
+          </a>
 
-        <div class="w-[1px] h-6 bg-default-300"></div>
-
-        <div class="flex items-center gap-7">
           <NuxtLink
-            class="cursor-pointer text-default-700 hover:text-primary-500"
+            class="cursor-pointer text-default-700 font-semibold hover:text-primary-500 hidden lg:block"
           >
+            Về chúng tôi
+          </NuxtLink>
+
+          <NuxtLink
+            class="cursor-pointer text-default-700 font-semibold hover:text-primary-500 hidden lg:block"
+          >
+            Cửa hàng
+          </NuxtLink>
+        </div>
+
+        <div class="w-[1px] h-6 bg-default-300 hidden lg:block"></div>
+
+        <div class="flex items-center gap-5 sm:gap-7">
+          <FormSwitchAddressInput v-if="currentCustomer && currentCustomer?.cart.address_id && route.name !== 'cart'" class="w-32 xs:w-52 lg:w-72" />
+
+          <NuxtLink
+            v-if="currentCustomer"
+            :to="{ name: 'cart' }"
+            :key="cart.count"
+            class="cursor-pointer relative text-default-700 hover:text-primary-500"
+            exact-active-class="text-primary-500"
+            :class="{ 'animate-shake': cart.wasChanged }"
+          >
+            <span v-show="cart.count > 0" class="absolute font-bold min-w-[theme(space.5)] h-5 rounded-full bg-danger-500 text-white text-xs flex items-center justify-center -right-4 -top-2 px-1">
+              {{ cart.count }}
+            </span>
             <Icon name="heroicons:shopping-bag" class="w-6 h-6" />
           </NuxtLink>
+          <a class="cursor-pointer relative text-default-700 hover:text-primary-500" @click="useMustBeLoginModal().open" v-else>
+            <Icon name="heroicons:shopping-bag" class="w-6 h-6" />
+          </a>
 
           <NuxtLink
             v-if="!currentCustomer"
@@ -93,7 +127,7 @@ async function logout() {
             <HeadlessMenuButton
               class="cursor-pointer focus:outline-none text-default-700 flex items-center gap-1 hover:text-primary-500"
             >
-              <Icon name="heroicons:user-circle" class="w-7 h-7" />
+              <span class="hidden lg:block">Chào {{ currentCustomer.last_name }}</span> <Icon name="heroicons:user-circle" class="w-7 h-7" />
             </HeadlessMenuButton>
 
             <transition
@@ -105,7 +139,7 @@ async function logout() {
               leave-to-class="transform scale-95 opacity-0"
             >
               <HeadlessMenuItems
-                class="absolute divide-y divide-default-100 right-0 mt-2 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="absolute divide-y divide-default-100 right-0 mt-4 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div class="py-1">
                   <HeadlessMenuItem v-slot="{ active }">
@@ -181,8 +215,14 @@ async function logout() {
               </HeadlessMenuItems>
             </transition>
           </HeadlessMenu>
+
+          <a class="block lg:hidden cursor-pointer">
+            <Icon name="heroicons:bars-3" class="w-6 h-6 hover:text-primary-500" />
+          </a>
         </div>
       </div>
     </div>
   </header>
+
+  <SearchModal v-model:shown="searchShown" />
 </template>

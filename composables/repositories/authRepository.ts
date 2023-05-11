@@ -79,6 +79,20 @@ declare global {
     status?: string
     page?: number,
   }
+
+  type CartCreationData = {
+    product_id?: number,
+  }
+
+  type CartEditData = {
+    branch_id?: number,
+    address_id?: number,
+    note?: string,
+  }
+
+  type CartItemEditData = {
+    qty?: number,
+  }
 }
 
 export const useLoginCustomerApi = (credentials: Credentials, headers: object = {}) => {
@@ -258,18 +272,6 @@ export const useDestroyAddressApi = (id: string, headers: object = {}) => {
   })
 }
 
-export const useSetDefaultAddressApi = (id: string, headers: object = {}) => {
-  const { $axios } = useNuxtApp()
-  const accessToken = useCookie<string|null>('access_token')
-
-  return $axios.put(`public/auth/addresses/${id}/set-default`, {}, {
-    headers: {
-      Authorization: `Bearer ${accessToken.value}`,
-      ...headers,
-    },
-  })
-}
-
 // Order
 export const useCountOrderMetricApi = (metric: string, filter?: OrderFilter, headers: object = {}) => {
   const { $axios } = useNuxtApp()
@@ -318,6 +320,79 @@ export const useCancelOrderApi = (id: string|number, headers: object = {}) => {
   const accessToken = useCookie<string|null>('access_token')
 
   return $axios.put(`public/auth/orders/${id}/cancel`, {}, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+// Cart
+export const useAddToCartApi = (data: CartCreationData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.post(`public/auth/cart`, data, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useIndexCartApi = (headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.get(`public/auth/cart`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useEditCartApi = (data: CartEditData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.put(`public/auth/cart`, data, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useEditCartItemApi = (id: string, data: CartItemEditData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.put(`public/auth/cart/cart-items/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useDeleteCartItemApi = (id: string, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.delete(`public/auth/cart/cart-items/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useCheckoutApi = (headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.post(`public/auth/cart/checkout`, {}, {
     headers: {
       Authorization: `Bearer ${accessToken.value}`,
       ...headers,
