@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 const currentCustomer = useCurrentCustomer()
-const { data: addresses } = await useAsyncData('addresses',
-  async () => (await useIndexAddressApi()).data.data
-)
+const addresses = ref((await useIndexAddressApi()).data.data)
 const selectedAddress = ref(currentCustomer.value.cart.address)
+const cart = useCart()
 
 async function setCartAddress(addressId: number) {
   await useEditCartApi({ address_id: addressId })
-    .then(() => {
-      useCart().fetch()
+    .then((res) => {
+      cart.initFromResponse(res.data.data)
+      cart.changed()
     })
 }
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 definePageMeta({
-  layout: "product-collection",
+  layout: "default",
   middleware: ["optional-auth"],
 });
 
@@ -47,41 +47,44 @@ watch([filter, sorter], async () => {
 </script>
 
 <template>
-  <div class="px-3 lg:px-7 p-7">
-    <nuxt-img :src="brand.thumbnail?.url" class="w-32 h-32 rounded-lg border border-default-300 mb-5" />
-    <h1 class="text-3xl font-bold text-default-700 flex items-center">{{ brand.name }}
-      <div class="ml-auto -mr-3 lg:-mr-7">
-        <ProductSorter v-model="sorter" />
-      </div>
-    </h1>
-  </div>
-
-  <div
-    v-if="!loading"
-    class="grid items-strech grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
-  >
-    <ProductVerticalItem
-      v-for="product in products.data"
-      class="flex-none p-7 border border-default-100 -ml-px -mt-px hover:bg-primary-50"
-      :key="product.id"
-      :id="product.id"
-      :thumbnail="product.thumbnail?.url"
-      :name="product.name"
-      :sale-price="product.sale_price"
-      thumbnail-style="bg-transparent"
-      :can-add-to-cart="true"
-    />
-  </div>
-
-  <div class="p-7 flex flex-col gap-7 sm:flex-row justify-center items-center text-sm">
-    <div class="text-default-700">
-      {{ products.meta.from }}-{{ products.meta.to }} trên tổng
-      {{ products.meta.total }} sản phẩm.
+  <NuxtLayout name="product-collection">
+    <div class="px-3 lg:px-7 p-7">
+      <nuxt-img :src="brand.thumbnail?.url" class="w-32 h-32 rounded-lg border border-default-300 mb-5" />
+      <h1 class="text-3xl font-bold text-default-700 flex items-center">{{ brand.name }}
+        <div class="ml-auto -mr-3 lg:-mr-7">
+          <ProductSorter v-model="sorter" />
+        </div>
+      </h1>
     </div>
-    <Paginator
-      class="ml-auto"
-      :meta="products.meta"
-      :filter="filter"
-    />
-  </div>
+
+    <div
+      v-if="!loading"
+      class="grid items-strech grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
+    >
+      <ProductVerticalItem
+        v-for="product in products.data"
+        class="flex-none p-7 border border-default-100 -ml-px -mt-px hover:bg-primary-50"
+        :key="product.id"
+        :id="product.id"
+        :slug="product.slug"
+        :thumbnail="product.thumbnail?.url"
+        :name="product.name"
+        :sale-price="product.sale_price"
+        thumbnail-style="bg-transparent"
+        :can-add-to-cart="true"
+      />
+    </div>
+
+    <div class="p-7 flex flex-col gap-7 sm:flex-row justify-center items-center text-sm">
+      <div class="text-default-700">
+        {{ products.meta.from }}-{{ products.meta.to }} trên tổng
+        {{ products.meta.total }} sản phẩm.
+      </div>
+      <Paginator
+        class="ml-auto"
+        :meta="products.meta"
+        :filter="filter"
+      />
+    </div>
+  </NuxtLayout>
 </template>

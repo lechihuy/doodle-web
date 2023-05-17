@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import MainHeader from '~/layouts/partials/MainHeader.vue'
-
 const route = useRoute()
 
 const { data: productGroups } = useAsyncData<any>('product-groups',
@@ -12,8 +10,6 @@ const { data: productGroups } = useAsyncData<any>('product-groups',
 </script>
 
 <template>
-  <MainHeader />
-
   <div class="relative">
     <div class="flex flex-col lg:flex-row container mx-auto min-h-[calc(100vh_-_theme(space.16))] lg:divide-x divide-default-100">
       <div class="w-full lg:w-72 flex-none pt-3 lg:pt-7 px-3 flex flex-col gap-5">

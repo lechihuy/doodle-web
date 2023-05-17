@@ -2,6 +2,7 @@
 const currentCustomer = useCurrentCustomer()
 const cart = useCart()
 const branches = ref(cart.data.available_branches)
+console.log(branches.value)
 const { $lodash } = useNuxtApp()
 
 const selectedBranch = ref(cart.data.branch)
@@ -23,6 +24,13 @@ async function setCartBranch(branchId: number) {
 
 watch (cart, () => {
   selectedBranch.value = cart.data.branch
+
+  branches.value = branches.value.map((branch) => {
+    branch.distance = cart.data.address.meta.branch_distances.find((branchDistance) => branchDistance.branch_id === branch.id).distance
+    return branch
+  })
+
+  branches.value = $lodash.sortBy(branches.value, 'distance')
 }, { deep: true })
 </script>
 

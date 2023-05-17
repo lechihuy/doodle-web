@@ -37,3 +37,13 @@ export const useIndexProductsApi = (filter?: ProductFilter, sorter?: ProductSort
     }
   })
 }
+
+export const useDetailProductApi = (id: string, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+
+  return $axios.get(`public/products/${id}`, {
+    headers: {
+      ...headers,
+    },
+  })
+}

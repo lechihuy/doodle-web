@@ -19,6 +19,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
           class=" flex-none"
           :key="product.id"
           :id="product.id"
+          :slug="product.slug"
           :thumbnail="product.thumbnail?.url"
           :name="product.name"
           :sale-price="product.sale_price"

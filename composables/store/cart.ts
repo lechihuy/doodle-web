@@ -7,30 +7,29 @@ export const useCart = defineStore("cart", {
       data: null,
       count: 0,
       wasChanged: false,
-      loading: false,
     }
   },
 
   actions: {
     async initFromResponse(res: any) {
-      this.data = res.data.data
+      this.data = res
       this.count = _.sumBy(this.data?.items, 'qty')
     },
     
     async fetch() {
-      await useIndexCartApi()
-        .then(res => {
-          this.initFromResponse(res)
-        })
+      const { data } = await useAsyncData('cart',
+        async () => (await useIndexCartApi()).data.data
+      )
+      
+      this.initFromResponse(data.value)
     },
 
     async add(productId: number) {
 
       return useAddToCartApi({ product_id: productId })
         .then(res => {
-          this.initFromResponse(res)
-          this.wasChanged = true
-          setTimeout(() => this.wasChanged = false, 200)
+          this.initFromResponse(res.data.data)
+          this.changed()
         })
     },
 
@@ -39,9 +38,8 @@ export const useCart = defineStore("cart", {
 
       return useEditCartItemApi(item.id, { qty: item.qty - 1 })
         .then(res => {
-          this.initFromResponse(res)
-          this.wasChanged = true
-          setTimeout(() => this.wasChanged = false, 200)
+          this.initFromResponse(res.data.data)
+          this.changed()
         })
     },
 
@@ -50,10 +48,14 @@ export const useCart = defineStore("cart", {
 
       return useDeleteCartItemApi(item.id)
         .then(res => {
-          this.initFromResponse(res)
-          this.wasChanged = true
-          setTimeout(() => this.wasChanged = false, 200)
+          this.initFromResponse(res.data.data)
+          this.changed()
         })
+    },
+
+    changed() {
+      this.wasChanged = true
+      setTimeout(() => this.wasChanged = false, 300)
     },
 
     itemByProductId(productId: number) {

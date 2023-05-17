@@ -2,6 +2,7 @@ export { useToast } from '~/composables/store/toast'
 export { useActionConfirmationModal } from '~/composables/store/action-confirmation-modal'
 export { useMustBeLoginModal } from '~/composables/store/must-be-login-modal'
 export { useNotEnoughStockModal } from '~/composables/store/not-enough-stock-modal'
+export { useRateOrderModal } from '~/composables/store/rate-order-modal'
 export { useVoucherModal } from '~/composables/store/voucher-modal'
 export { useCart } from '~/composables/store/cart'
 
@@ -30,7 +31,8 @@ export {
   useEditCartApi,
   useEditCartItemApi,
   useDeleteCartItemApi,
-  useCheckoutApi
+  useCheckoutApi,
+  useRateOrderApi
 } from '~/composables/repositories/authRepository'
 
 export {
@@ -43,7 +45,8 @@ export {
 
 export {
   useIndexProductLensApi,
-  useIndexProductsApi
+  useIndexProductsApi,
+  useDetailProductApi
 } from '~/composables/repositories/productRepository'
 
 export {
@@ -58,6 +61,7 @@ export {
 
 export {
   useIndexBranchsApi,
+  useCountBranchMetricApi,
 } from '~/composables/repositories/branchRepository'
 
 export {

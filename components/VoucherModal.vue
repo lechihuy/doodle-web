@@ -43,15 +43,31 @@ const voucherModal = useVoucherModal()
                 </HeadlessDialogTitle>
 
                 <div class="p-7">
-                  <p class="font-bold text-default-700 mb-2">Có thể áp dụng</p>
-                  <div class="flex flex-col gap-3">
-                    <Voucher v-for="voucher in voucherModal.vouchers.filter((voucher) => voucher.applicable)" :key="voucher.id" :voucher="voucher" />
+                  <div class="flex flex-col items-center gap-2" v-if="voucherModal.vouchers.length === 0">
+                    <div
+                      class="w-14 h-14 rounded-full bg-default-50 flex items-center justify-center"
+                    >
+                      <Icon name="heroicons:ticket" class="w-8 h-8 text-default-400" />
+                    </div>
+                    <p class="font-semibold">Hiện phiếu ưu đãi đã hết</p>
+                    <span class="text-sm"
+                      >Quý khách hãy đợi những phiếu ưu đãi tiếp theo nhé.</span
+                    >
                   </div>
 
-                  <p class="font-bold text-default-700 mb-2 mt-5">Chưa đủ điều kiện</p>
-                  <div class="flex flex-col gap-3">
-                    <Voucher v-for="voucher in voucherModal.vouchers.filter((voucher) => !voucher.applicable)" :key="voucher.id" :voucher="voucher" />
-                  </div>
+                  <template v-if="voucherModal.vouchers.filter((voucher) => voucher.applicable).length > 0">
+                    <p class="font-bold text-default-700 mb-2">Có thể áp dụng</p>
+                    <div class="flex flex-col gap-3">
+                      <Voucher v-for="voucher in voucherModal.vouchers.filter((voucher) => voucher.applicable)" :key="voucher.id" :voucher="voucher" />
+                    </div>
+                  </template>
+
+                  <template v-if="voucherModal.vouchers.filter((voucher) => !voucher.applicable).length > 0">
+                    <p class="font-bold text-default-700 mb-2 mt-5">Chưa đủ điều kiện</p>
+                    <div class="flex flex-col gap-3">
+                      <Voucher v-for="voucher in voucherModal.vouchers.filter((voucher) => !voucher.applicable)" :key="voucher.id" :voucher="voucher" />
+                    </div>
+                  </template>
                 </div>
               </div>
             </HeadlessDialogPanel>

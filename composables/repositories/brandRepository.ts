@@ -12,7 +12,6 @@ declare global {
   }
 }
 
-
 export const useIndexBrandsApi = (filter?: BrandFilter, sorter?: BrandSorter, headers: object = {}) => {
   const { $axios } = useNuxtApp()
 
@@ -27,7 +26,7 @@ export const useIndexBrandsApi = (filter?: BrandFilter, sorter?: BrandSorter, he
   })
 }
 
-export const useDetailBrandApi = (id: string|number, headers: object = {}) => {
+export const useDetailBrandApi = (id: string, headers: object = {}) => {
   const { $axios } = useNuxtApp()
 
   return $axios.get(`public/brands/${id}`, {

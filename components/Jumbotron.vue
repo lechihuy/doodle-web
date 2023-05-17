@@ -35,7 +35,7 @@ const currentCustomer = useCurrentCustomer();
           tôi tin tưởng rằng sự tiện lợi và chất lượng sẽ làm hài lòng các bạn.
         </p>
         <div class="flex items-center justify-center lg:justify-start gap-2">
-          <NuxtLink class="btn btn-primary btn-large flex-none">
+          <NuxtLink :to="{ name: 'products' }" class="btn btn-primary btn-large flex-none">
             Khám phá <span class="hidden xs:inline-block">sản phẩm</span>
             <Icon name="heroicons:arrow-right" class="w-4 h-4" />
           </NuxtLink>

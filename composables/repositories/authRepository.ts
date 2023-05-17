@@ -80,6 +80,11 @@ declare global {
     page?: number,
   }
 
+  type OrderRatingData = {
+    rating?: number,
+    feedback?: string,
+  }
+
   type CartCreationData = {
     product_id?: number,
   }
@@ -320,6 +325,18 @@ export const useCancelOrderApi = (id: string|number, headers: object = {}) => {
   const accessToken = useCookie<string|null>('access_token')
 
   return $axios.put(`public/auth/orders/${id}/cancel`, {}, {
+    headers: {
+      Authorization: `Bearer ${accessToken.value}`,
+      ...headers,
+    },
+  })
+}
+
+export const useRateOrderApi = (id: string|number, data: OrderRatingData, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+  const accessToken = useCookie<string|null>('access_token')
+
+  return $axios.post(`public/auth/orders/${id}/rate`, data, {
     headers: {
       Authorization: `Bearer ${accessToken.value}`,
       ...headers,

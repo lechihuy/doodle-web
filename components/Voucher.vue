@@ -3,12 +3,15 @@ const props = defineProps({
   voucher: { type: Object, required: true },
 })
 
+const cart = useCart()
+
 async function apply() {
   if (!props.voucher.applicable) return
 
   await useApplyVoucherApi(props.voucher.id)
     .then(async () => {
-      await useCart().fetch()
+      await cart.fetch()
+      cart.changed()
     })
     .finally(() => {
       useVoucherModal().close()

@@ -12,7 +12,6 @@ declare global {
   }
 }
 
-
 export const useIndexBranchsApi = (filter?: BranchFilter, sorter?: BranchSorter, headers: object = {}) => {
   const { $axios } = useNuxtApp()
 
@@ -24,5 +23,15 @@ export const useIndexBranchsApi = (filter?: BranchFilter, sorter?: BranchSorter,
       ...filter,
       sort: sorter
     }
+  })
+}
+
+export const useCountBranchMetricApi = (metric: string, headers: object = {}) => {
+  const { $axios } = useNuxtApp()
+
+  return $axios.get(`public/branches/metrics/${metric}`, {
+    headers: {
+      ...headers,
+    },
   })
 }

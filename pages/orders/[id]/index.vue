@@ -17,11 +17,17 @@ const { data: order } = await useAsyncData(
   async () => (await useDetailOrderApi(id)).data.data
 );
 
-console.log(order.value);
-
-fetchRealtimeOrderTracking(order.value.code, (snapshot: any) => {
-  refreshNuxtData("order");
+fetchRealtimeOrderTracking(order.value.code, async (snapshot: any) => {
+  await refreshNuxtData("order");
 });
+
+watch (order, () => {
+  if (order.value.ratable) {
+    useRateOrderModal().open(order.value.id, () => {
+      refreshNuxtData("order")
+    })
+  }
+}, { deep: true })
 
 async function cancelOrder() {
   const modal = useActionConfirmationModal();
@@ -37,6 +43,13 @@ async function cancelOrder() {
       })
       .catch((err) => toast.error("Đã có lỗi xảy ra, vui lòng thử lại sau."));
   };
+}
+
+async function rateOrder(order: any) {
+  const modal = useRateOrderModal()
+  modal.open(order.id, () => {
+    refreshNuxtData("order");
+  })
 }
 </script>
 
@@ -129,9 +142,9 @@ async function cancelOrder() {
                 class="border border-default-200 overflow-hidden w-14 h-14 lg:w-20 lg:h-20 rounded"
               >
                 <img
-                  v-if="item.inventory.product.thumbnail"
-                  :src="item.inventory.product.thumbnail.url"
-                  :alt="`Ảnh của ${item.inventory.product.name}`"
+                  v-if="item.product.thumbnail"
+                  :src="item.product.thumbnail.url"
+                  :alt="`Ảnh của ${item.product.name}`"
                   class="w-full h-full rounded object-contain"
                 />
                 <div
@@ -144,16 +157,16 @@ async function cancelOrder() {
             </div>
             <div class="grow flex flex-col gap-1">
               <NuxtLink class="link-primary font-semibold">
-                {{ item.inventory.product.name }}
+                {{ item.product.name }}
               </NuxtLink>
             </div>
             <div class="ml-auto flex flex-col gap-1 text-right text-sm">
               <p>
-                {{ currency(item.inventory.product.sale_price) }} x
+                {{ currency(item.product.sale_price) }} x
                 {{ item.qty }}
               </p>
               <p class="font-semibold">
-                = {{ currency(item.qty * item.inventory.product.sale_price) }}
+                = {{ currency(item.qty * item.product.sale_price) }}
               </p>
             </div>
           </div>
@@ -185,8 +198,34 @@ async function cancelOrder() {
         <p v-if="order.note">{{ order.note }}</p>
         <p v-else class="text-default-500">&mdash;</p>
       </div>
+      <div class="py-7 flex flex-col gap-2">
+        <label class="font-semibold">Đánh giá</label>
+        <div v-if="order.rating" class="flex flex-col gap-2">
+          <div class="flex items-center gap-1">
+            <Icon v-for="i in 5" :key="i"
+              class="w-5 h-5"
+              :name="
+                order.rating >= i
+                  ? 'teenyicons:star-solid'
+                  : 'teenyicons:star-outline'
+              "
+              :class="[
+                order.rating >= i ? 'text-yellow-500' : 'text-default-200'
+              ]"
+            />
+          </div>
+          <p v-if="order.feedback" class="italic">"{{ order.feedback }}"</p>
+        </div>
+        <div v-else>
+          <button type="button" class="btn btn-transparent btn-sm" @click="rateOrder(order)">
+            <Icon name="heroicons:star-solid" class="w-5 h-5 text-yellow-500" /> Đánh giá
+          </button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <RateOrderModal />
 </template>
 
 <style scoped lang="scss">

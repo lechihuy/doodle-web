@@ -14,9 +14,7 @@ const searchShown = ref(false)
 const cart = useCart()
 
 if (currentCustomer.value) {
-  cart.loading = true
-  await cart.fetch()
-  cart.loading = false
+  cart.fetch()
 }
 
 async function logout() {
@@ -83,6 +81,8 @@ async function logout() {
           </NuxtLink>
 
           <NuxtLink
+            :to="{ name: 'branches' }"
+            exact-active-class="text-primary-500"
             class="cursor-pointer text-default-700 font-semibold hover:text-primary-500 hidden lg:block"
           >
             Cửa hàng
@@ -95,22 +95,23 @@ async function logout() {
           <FormSwitchAddressInput v-if="currentCustomer && currentCustomer?.cart.address_id && route.name !== 'cart'" class="w-32 xs:w-52 lg:w-72" />
 
           <NuxtLink
-            v-if="currentCustomer"
+            v-if="currentCustomer && cart.data"
             :to="{ name: 'cart' }"
             :key="cart.count"
             class="cursor-pointer relative text-default-700 hover:text-primary-500"
             exact-active-class="text-primary-500"
             :class="{ 'animate-shake': cart.wasChanged }"
           >
-            <span v-show="cart.count > 0" class="absolute font-bold min-w-[theme(space.5)] h-5 rounded-full bg-danger-500 text-white text-xs flex items-center justify-center -right-4 -top-2 px-1">
+            <span v-if="cart.count > 0" class="absolute font-bold min-w-[theme(space.5)] h-5 rounded-full bg-danger-500 text-white text-xs flex items-center justify-center -right-4 -top-2 px-1">
               {{ cart.count }}
             </span>
             <Icon name="heroicons:shopping-bag" class="w-6 h-6" />
           </NuxtLink>
+            
           <a class="cursor-pointer relative text-default-700 hover:text-primary-500" @click="useMustBeLoginModal().open" v-else>
             <Icon name="heroicons:shopping-bag" class="w-6 h-6" />
           </a>
-
+        
           <NuxtLink
             v-if="!currentCustomer"
             class="cursor-pointer text-default-700 hover:text-primary-500"

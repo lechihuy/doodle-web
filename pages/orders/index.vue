@@ -59,6 +59,13 @@ async function cancelOrder(order: any) {
   }
 }
 
+async function rateOrder(order: any) {
+  const modal = useRateOrderModal()
+  modal.open(order.id, () => {
+    refreshNuxtData("orders");
+  })
+}
+
 watch(
   filter,
   async () => {
@@ -197,16 +204,14 @@ watch(
             <p class="text-sm text-default-700 font-semibold">
               {{ $moment(order.created_at).format("DD/MM/YYYY HH:mm") }}
             </p>
-            <span class="text-sm text-default-500 line-clamp-1">
-              {{
-                order.items
-                  .map((item) => item.inventory.product.name)
-                  .join(", ")
-              }}
-            </span>
             <div v-if="order.cancelable" class="mt-3">
               <button type="button" class="btn btn-transparent btn-sm" @click="cancelOrder(order)">
                 Hủy đơn
+              </button>
+            </div>
+            <div v-if="order.ratable" class="mt-3">
+              <button type="button" class="btn btn-transparent btn-sm" @click="rateOrder(order)">
+                <Icon name="heroicons:star-solid" class="w-5 h-5 text-yellow-500" /> Đánh giá
               </button>
             </div>
           </div>
@@ -289,4 +294,6 @@ watch(
       </div>
     </div>
   </div>
+
+  <RateOrderModal />
 </template>

@@ -6,16 +6,25 @@ const props = defineProps({
 const cart = useCart();
 const cartItem = ref(cart.itemByProductId(props.productId));
 const currentCustomer = useCurrentCustomer();
+const addToCartLoading = ref(false);
+const decrementLoading = ref(false);
+const removeLoading = ref(false);
 
-watch(cart, () => {
-  cartItem.value = cart.itemByProductId(props.productId)
-}, { deep: true })
+watch(
+  cart,
+  () => {
+    cartItem.value = cart.itemByProductId(props.productId);
+  },
+  { deep: true }
+);
 
 async function addToCart() {
   if (!currentCustomer.value) {
     useMustBeLoginModal().open();
     return;
   }
+
+  addToCartLoading.value = true;
 
   await cart
     .add(props.productId)
@@ -24,87 +33,205 @@ async function addToCart() {
     })
     .catch((err) => {
       if (err.response.status === 503) {
-        useNotEnoughStockModal().open()
+        useNotEnoughStockModal().open();
       }
-    });
+    })
+    .finally(() => (addToCartLoading.value = false));
 }
 
 async function decrement() {
+  decrementLoading.value = true;
+
   await cart
     .decrementItemQtyByProductId(props.productId)
     .then(() => {
       cartItem.value = cart.itemByProductId(props.productId);
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => (decrementLoading.value = false));
 }
 
 async function remove() {
-  await cart.removeItemByProductId(props.productId).then(() => {
-    cartItem.value = null;
-  });
+  removeLoading.value = true;
+
+  await cart
+    .removeItemByProductId(props.productId)
+    .then(() => {
+      cartItem.value = null;
+    })
+    .finally(() => (removeLoading.value = false));
 }
 </script>
 
 <template>
-  <MagicButton @click="addToCart" v-if="!cartItem">
-    <button
-      type="button"
-      class="btn btn-transparent border-primary-500 text-primary-500 btn-block"
-    >
-      Chọn mua
-    </button>
-  </MagicButton>
+  <button
+    v-if="!cartItem"
+    @click="addToCart"
+    type="button"
+    :disabled="addToCartLoading"
+    class="btn btn-primary btn-block"
+    :class="[
+      {
+        'btn-large !text-xl': size === 'large',
+        'btn-sm !text-sm': size === 'small',
+      },
+    ]"
+  >
+    <IconLoading
+      :class="[
+        {
+          'w-6 h-6': size === 'large',
+          'w-4 h-4': size === 'normal',
+          'w-2 h-2': size === 'small',
+        },
+      ]"
+      v-show="addToCartLoading"
+    />
+    Chọn mua
+  </button>
+
   <div class="flex items-center gap-2" v-else>
     <div
       class="flex grow justify-between items-center rounded-full"
-      :class="[
-        cartItem.available ? 'bg-default-50' : 'bg-warning-50'
-      ]"
+      :class="[cartItem.available ? 'bg-default-50' : 'bg-warning-50']"
     >
       <button
         type="button"
         @click="decrement"
+        :disabled="decrementLoading"
         class="btn p-0 bg-white rounded-full btn-transparent"
-        :class="[size === 'normal' ? 'w-10 h-10' : 'w-8 h-8']"
+        :class="[
+          {
+            'w-12 h-12': size === 'large',
+            'w-10 h-10': size === 'normal',
+            'w-8 h-8': size === 'small',
+          },
+        ]"
       >
         <Icon
+          v-show="!decrementLoading"
           name="heroicons:minus"
           class="text-primary-500"
-          :class="[size === 'normal' ? 'w-6 h-6' : 'w-4 h-4']"
+          :class="[
+            {
+              'w-8 h-8': size === 'large',
+              'w-6 h-6': size === 'normal',
+              'w-4 h-4': size === 'small',
+            },
+          ]"
+        />
+        <IconLoading
+          class="text-primary-300"
+          v-show="decrementLoading"
+          :class="[
+            {
+              'w-6 h-6': size === 'large',
+              'w-4 h-4': size === 'normal',
+              'w-2 h-2': size === 'small',
+            },
+          ]"
         />
       </button>
       <span
         class="px-3 flex items-center gap-2"
-        :class="[size === 'normal' ? 'text-xl' : 'text-base']"
+        :class="[
+          {
+            'text-xl': size === 'large',
+            'text-sm': size === 'small',
+          },
+        ]"
+      >
+        <Tooltip
+          v-if="!cartItem.available"
+          :value="`Số lượng vượt quá tồn kho của chi nhánh hiện tại`"
         >
-        <Tooltip v-if="!cartItem.available" :value="`Số lượng vượt quá tồn kho của chi nhánh hiện tại`">
-          <Icon name="heroicons:exclamation-triangle" class="text-warning-900" :class="[size === 'normal' ? 'w-6 h-6' : 'w-5 h-5']" />
-        </Tooltip> {{ cartItem.qty }}
+          <Icon
+            name="heroicons:exclamation-triangle"
+            class="text-warning-900"
+            :class="[
+              {
+                'w-6 h-6': size === 'large',
+                'w-4 h-4': size === 'normal' || size === 'small',
+              },
+            ]"
+          />
+        </Tooltip>
+        {{ cartItem.qty }}
       </span>
       <button
         @click="addToCart"
         type="button"
-        class="btn w-10 h-10 p-0 bg-white rounded-full btn-transparent"
-        :class="[size === 'normal' ? 'w-10 h-10' : 'w-8 h-8']"
+        :disabled="addToCartLoading"
+        class="btn p-0 bg-white rounded-full btn-transparent"
+        :class="[
+          {
+            'w-12 h-12': size === 'large',
+            'w-10 h-10': size === 'normal',
+            'w-8 h-8': size === 'small',
+          },
+        ]"
       >
         <Icon
+          v-show="!addToCartLoading"
           name="heroicons:plus"
           class="text-primary-500"
-          :class="[size === 'normal' ? 'w-6 h-6' : 'w-4 h-4']"
+          :class="[
+            {
+              'w-8 h-8': size === 'large',
+              'w-6 h-6': size === 'normal',
+              'w-4 h-4': size === 'small',
+            },
+          ]"
+        />
+        <IconLoading
+          class="text-primary-300"
+          v-show="addToCartLoading"
+          :class="[
+            {
+              'w-6 h-6': size === 'large',
+              'w-4 h-4': size === 'normal',
+              'w-2 h-2': size === 'small',
+            },
+          ]"
         />
       </button>
     </div>
     <Tooltip value="Gỡ bỏ">
       <button
         type="button"
+        :disabled="removeLoading"
         @click="remove"
-        class="btn w-10 h-10 p-0 bg-white rounded-full btn-transparent"
-        :class="[size === 'normal' ? 'w-10 h-10' : 'w-8 h-8']"
+        class="btn p-0 bg-white rounded-full btn-transparent"
+        :class="[
+          {
+            'w-12 h-12': size === 'large',
+            'w-10 h-10': size === 'normal',
+            'w-8 h-8': size === 'small',
+          },
+        ]"
       >
         <Icon
+          v-show="!removeLoading"
           name="heroicons:trash"
           class="text-default-500"
-          :class="[size === 'normal' ? 'w-6 h-6' : 'w-4 h-4']"
+          :class="[
+            {
+              'w-8 h-8': size === 'large',
+              'w-6 h-6': size === 'normal',
+              'w-4 h-4': size === 'small',
+            },
+          ]"
+        />
+        <IconLoading
+          class="text-default-300"
+          v-show="removeLoading"
+          :class="[
+            {
+              'w-6 h-6': size === 'large',
+              'w-4 h-4': size === 'normal',
+              'w-2 h-2': size === 'small',
+            },
+          ]"
         />
       </button>
     </Tooltip>
