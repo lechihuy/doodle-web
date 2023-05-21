@@ -133,3 +133,38 @@
     transform: translateX(20px);
     opacity: 0;
 }
+
+.carousel__pagination {
+    @apply z-[1] inset-x-0 h-16 -bottom-7 flex justify-center items-start pt-4 bg-gradient-to-t from-default-400 to-transparent absolute
+}
+.carousel__pagination-button::after {
+    @apply bg-white !w-5 !rounded ring-1 ring-white pointer-events-auto
+}
+
+.carousel__pagination-button:hover::after,
+.carousel__pagination-button--active::after {
+    @apply !bg-primary-500
+}
+
+.carousel__slide {
+    @apply !items-stretch
+}
+
+.carousel__next--disabled,
+.carousel__prev--disabled {
+    @apply !hidden
+}
+
+.carousel__prev,
+.carousel__next {
+    @apply !w-10 !h-10 !rounded-full !bg-default-50 !text-default-500
+}
+
+.carousel__prev:hover,
+.carousel__next:hover {
+    @apply !text-primary-500
+}
+
+.swiper-wrapper {
+ @apply !items-stretch
+}

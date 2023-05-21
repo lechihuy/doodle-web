@@ -26,6 +26,8 @@
     "axios": "^1.2.3",
     "firebase": "^9.20.0",
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.40"
+    "moment-timezone": "^0.5.40",
+    "nuxt-swiper": "^1.1.0",
+    "vue3-carousel": "^0.3.1"
   }
 }

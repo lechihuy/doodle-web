@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
 definePageMeta({
   layout: "default",
   middleware: ["optional-auth"],
@@ -73,19 +76,32 @@ watch(searchInput, () => {
       <h3 class="text-xl font-bold mb-5" v-show="!searchInput">Khám phá {{ branches.length }} cửa hàng của chúng tôi ở {{ filter.keyword }}</h3>
       <h3 class="text-xl font-bold mb-5" v-show="searchInput">Có {{ branches.length }} cửa hàng được tìm thấy</h3>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div v-for="branch in branches" :key="branch.id">
-          <div class="relative w-full h-52 sm:h-64 z-[1] rounded-lg overflow-hidden" v-if="branch.address.lat && branch.address.lng">
-            <Map :coordinates="{
-              lat: branch.address.lat,
-              lng: branch.address.lng
-            }" class="h-full" />
+      <div class="flex flex-col divide-y divide-default-200 divide-dashed">
+        <div v-for="branch in branches" :key="branch.id" class="flex flex-col xl:flex-row py-5 xl:items-center gap-5 xl:gap-10">
+          <Carousel class="h-64  w-full xl:max-w-lg rounded-lg ring-1 ring-default-100 overflow-hidden" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
+            <Slide :key="0">
+              <nuxt-img :src="branch.thumbnail.url" class="h-full pointer-events-none" />
+            </Slide>
+            <Slide :key="1">
+              <div class="relative w-full h-64 z-[1] rounded-lg overflow-hidden" v-if="branch.address.lat && branch.address.lng">
+                <Map :coordinates="{
+                  lat: branch.address.lat,
+                  lng: branch.address.lng
+                }" class="h-full" />
+              </div>
+            </Slide>
+            <template #addons>
+              <Pagination />
+            </template>
+          </Carousel>
+         
+          <div class="flex flex-col grow">
+            <h3 class="mb-3 font-bold text-lg flex items-center gap-2">
+              <Icon name="heroicons:map-pin-solid" class="w-6 h-6 text-danger-500" />
+              {{ branch.name }}
+            </h3>
+            <p>{{ branch.address.full_address }}</p>
           </div>
-          <h3 class="mt-3 mb-3 font-bold text-lg flex items-center gap-2">
-            <Icon name="heroicons:map-pin-solid" class="w-6 h-6 text-danger-500" />
-            {{ branch.name }}
-          </h3>
-          <p>{{ branch.address.full_address }}</p>
         </div>
       </div>
     </div>

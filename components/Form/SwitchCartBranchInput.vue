@@ -2,7 +2,6 @@
 const currentCustomer = useCurrentCustomer()
 const cart = useCart()
 const branches = ref(cart.data.available_branches)
-console.log(branches.value)
 const { $lodash } = useNuxtApp()
 
 const selectedBranch = ref(cart.data.branch)

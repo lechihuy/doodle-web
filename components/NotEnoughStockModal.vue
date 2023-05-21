@@ -38,8 +38,14 @@ const cart = useCart()
                 <div class="bg-warning-100 w-14 h-14 rounded-full flex items-center justify-center">
                   <Icon name="heroicons:exclamation-triangle" class="w-8 h-8 text-warning-900" />
                 </div>
-                <h3 class="text-xl leading-6 font-semibold text-default-700">Số lượng tồn kho không đủ</h3>
-                <p class="text-center text-default-500 text-sm">Số lượng đã đạt tối đa số lượng tồn kho mà chi nhánh gần nhất có thể cung cấp, quý khách có thể chọn chi nhánh khác ở bên dưới và thử lại.</p>
+                <template v-if="notEnoughStockModal.type == 'OUT_OF_STOCK'">
+                  <h3 class="text-xl leading-6 font-semibold text-default-700">Sản phẩm đã hết hàng</h3>
+                  <p class="text-center text-default-500 text-sm">Quý khách có thể chọn chi nhánh khác ở bên dưới và thử lại.</p>
+                </template>
+                <template v-else>
+                  <h3 class="text-xl leading-6 font-semibold text-default-700">Số lượng tồn kho không đủ</h3>
+                  <p class="text-center text-default-500 text-sm">Số lượng đã đạt tối đa số lượng tồn kho mà chi nhánh gần nhất có thể cung cấp, quý khách có thể chọn chi nhánh khác ở bên dưới và thử lại.</p>
+                </template>
                 <FormSwitchCartBranchInput />
               </div>
             </HeadlessDialogPanel>

@@ -14,13 +14,14 @@ declare global {
   }
 }
 
-export const useIndexProductLensApi = (lens: string, headers: object = {}) => {
+export const useIndexProductLensApi = (lens: string, params: object = {}, headers: object = {}) => {
   const { $axios } = useNuxtApp()
 
   return $axios.get(`public/products/lenses/${lens}`, {
     headers: {
       ...headers,
     },
+    params: params
   })
 }
 

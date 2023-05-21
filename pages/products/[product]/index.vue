@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
 definePageMeta({
   layout: "default",
   middleware: ["optional-auth"],
@@ -13,8 +16,7 @@ const { data: product, error } = await useAsyncData(
 )
 
 if (error.value) {
-  console.log(error.value)
-  // showError(createError({ statusCode: 404 }))
+  showError(createError({ statusCode: 404 }))
 }
 </script>
 
@@ -32,11 +34,11 @@ if (error.value) {
           <AddToCartButton size="large" :product-id="product.id" />
           <div class="bg-default-50 border border-default-100 flex flex-col gap-3 p-5 rounded-lg">
             <div class="flex items-center gap-3">
-              <Icon name="noto:nine-oclock" class="w-6 h-6" />
+              <Icon name="mdi:clock-fast" class="w-6 h-6 text-primary-500" />
               <span>Đặt online giao tận nhà SIÊU TỐC trong nội thành</span>
             </div>
             <div class="flex items-center gap-3">
-              <Icon name="noto-v1:package" class="w-6 h-6" />
+              <Icon name="mdi:package" class="w-6 h-6 text-primary-500" />
               <span>Giao hàng tận tay dù chỉ là 1 đơn hàng</span>
             </div>
           </div>
@@ -81,21 +83,51 @@ if (error.value) {
 
       <div class="flex flex-col" v-if="product.variants.length > 0">
         <h3 class="font-bold text-xl text-default-700 mb-5">Sản phẩm liên quan</h3>
-        <div
-          class="grid items-strech grid-cols-2 xl:grid-cols-4 -mx-3 lg:-mx-10"
-        >
-          <ProductVerticalItem
-            v-for="variantProduct in product.variants"
-            class="flex-none p-7 border border-default-100 -ml-px -mt-px hover:bg-primary-50"
-            :key="variantProduct.id"
-            :id="variantProduct.id"
-            :slug="variantProduct.slug"
-            :thumbnail="variantProduct.thumbnail?.url"
-            :name="variantProduct.name"
-            :sale-price="variantProduct.sale_price"
-            thumbnail-style="bg-transparent"
-            :can-add-to-cart="true"
-          />
+
+        <div class="-ml-px">
+          <Carousel :items-to-show="2" snap-align="start" class="block md:hidden -mx-3 relative lg:-mx-10">
+            <Slide v-for="variantProduct in product.variants" :key="variantProduct.id"
+              class="border-t border-b border-l last:border-r border-default-100"
+            >
+              <ProductVerticalItem
+                class="p-7 hover:bg-primary-50"
+                :key="variantProduct.id"
+                :id="variantProduct.id"
+                :slug="variantProduct.slug"
+                :thumbnail="variantProduct.thumbnail?.url"
+                :name="variantProduct.name"
+                :sale-price="variantProduct.sale_price"
+                thumbnail-style="bg-transparent"
+                :can-add-to-cart="true"
+              />
+            </Slide>
+
+            <template #addons="{ slidesCount }">
+              <Navigation v-if="slidesCount > 1" />
+            </template>
+          </Carousel>
+
+          <Carousel :items-to-show="4" snap-align="start" class="hidden md:block -mx-3 relative lg:-mx-10">
+            <Slide v-for="variantProduct in product.variants" :key="variantProduct.id"
+              class="border-t border-b border-l last:border-r border-default-100"
+            >
+              <ProductVerticalItem
+                class="p-7 hover:bg-primary-50"
+                :key="variantProduct.id"
+                :id="variantProduct.id"
+                :slug="variantProduct.slug"
+                :thumbnail="variantProduct.thumbnail?.url"
+                :name="variantProduct.name"
+                :sale-price="variantProduct.sale_price"
+                thumbnail-style="bg-transparent"
+                :can-add-to-cart="true"
+              />
+            </Slide>
+
+            <template #addons="{ slidesCount }">
+              <Navigation v-if="slidesCount > 1" />
+            </template>
+          </Carousel>
         </div>
       </div>
 

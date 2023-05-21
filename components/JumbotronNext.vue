@@ -9,7 +9,7 @@ const currentCustomer = useCurrentCustomer();
 
 <template>
   <div
-    class="jumbotron relative bg-bottom bg-no-repeat bg-default-50 -mt-16 pt-36 pb-20"
+    class="jumbotron relative bg-bottom bg-no-repeat bg-primary-500 -mt-16 pt-36 pb-20"
   >
     <div
       class="absolute inset-0 bg-grid-default-900 bg-[bottom_1px_center]"
@@ -26,11 +26,11 @@ const currentCustomer = useCurrentCustomer();
         class="flex flex-col gap-7 place-content-center text-center lg:text-left"
       >
         <h1
-          class="text-default-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight"
+          class="text-white font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight"
         >
-          Mở rộng thế giới <br> mua sắm của bạn
+          Mở rộng thế giới <br>mua sắm của bạn
         </h1>
-        <p class="text-lg text-default-700">
+        <p class="text-lg text-default-300">
           Mua sắm tạp hóa trực tuyến dễ dàng và tiện lợi hơn bao giờ hết, chúng
           tôi tin tưởng rằng sự tiện lợi và chất lượng sẽ làm hài lòng các bạn.
         </p>
@@ -158,10 +158,10 @@ const currentCustomer = useCurrentCustomer();
 
 <style scoped>
 .jumbotron {
-  @apply bg-[url(https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg)] 
+  /* @apply bg-[url(https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg)] 
     bg-[length:140rem]
     sm:bg-[length:135rem]
     md:bg-[length:94rem]
-    lg:bg-[length:90rem];
+    lg:bg-[length:90rem]; */
 }
 </style>

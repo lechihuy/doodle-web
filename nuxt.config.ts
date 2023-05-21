@@ -8,6 +8,12 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    [
+      'nuxt-swiper',
+      {
+        
+      }
+    ],
     '@nuxt/image-edge',
     'nuxt-headlessui',
     'nuxt-icon',
@@ -36,6 +42,6 @@ export default defineNuxtConfig({
       'constants',
       'layouts'
     ]
-  },
+  }
 })
   

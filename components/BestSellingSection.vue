@@ -1,6 +1,11 @@
 <script lang="ts" setup>
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
 const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellingProducts', 
-  async () => (await useIndexProductLensApi(PRODUCT_LENS.bestSeller)).data.data
+  async () => (await useIndexProductLensApi(PRODUCT_LENS.bestSeller, {
+    range: 'month'
+  })).data.data
 )
 </script>
 
@@ -12,19 +17,92 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
       <span>Sản phẩm bán chạy</span>
     </h3>
 
-    <div class="flex justify-center">
-      <div class="grid items-strech gap-7 grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+    <Carousel :items-to-show="1.5" snap-align="start" :items-to-scroll="1.5" class="block md:hidden">
+      <Slide v-for="product in bestSellingProducts" :key="product.id"
+        class="border-t border-b border-l last:border-r border-default-100"
+      >
         <ProductVerticalItem
-          v-for="product in bestSellingProducts"
-          class=" flex-none"
+          class="p-7 hover:bg-primary-50"
           :key="product.id"
           :id="product.id"
           :slug="product.slug"
           :thumbnail="product.thumbnail?.url"
           :name="product.name"
           :sale-price="product.sale_price"
+          thumbnail-style="bg-transparent"
+          :can-add-to-cart="true"
         />
-      </div>
-    </div>
+      </Slide>
+
+      <template #addons="{ slidesCount }">
+        <Navigation v-if="slidesCount > 1" />
+      </template>
+    </Carousel>
+
+    <Carousel :items-to-show="2.5" snap-align="start" :items-to-scroll="2.5" class="hidden md:block lg:hidden">
+      <Slide v-for="product in bestSellingProducts" :key="product.id"
+        class="border-t border-b border-l last:border-r border-default-100"
+      >
+        <ProductVerticalItem
+          class="p-7 hover:bg-primary-50"
+          :key="product.id"
+          :id="product.id"
+          :slug="product.slug"
+          :thumbnail="product.thumbnail?.url"
+          :name="product.name"
+          :sale-price="product.sale_price"
+          thumbnail-style="bg-transparent"
+          :can-add-to-cart="true"
+        />
+      </Slide>
+
+      <template #addons="{ slidesCount }">
+        <Navigation v-if="slidesCount > 1" />
+      </template>
+    </Carousel>
+
+    <Carousel :items-to-show="3.5" snap-align="start" :items-to-scroll="1.5" class="hidden lg:block xl:hidden">
+      <Slide v-for="product in bestSellingProducts" :key="product.id"
+        class="border-t border-b border-l last:border-r border-default-100"
+      >
+        <ProductVerticalItem
+          class="p-7 hover:bg-primary-50"
+          :key="product.id"
+          :id="product.id"
+          :slug="product.slug"
+          :thumbnail="product.thumbnail?.url"
+          :name="product.name"
+          :sale-price="product.sale_price"
+          thumbnail-style="bg-transparent"
+          :can-add-to-cart="true"
+        />
+      </Slide>
+
+      <template #addons="{ slidesCount }">
+        <Navigation v-if="slidesCount > 1" />
+      </template>
+    </Carousel>
+
+    <Carousel :items-to-show="5" snap-align="start" :touch-drag="false" :mouse-drag="false" class="hidden xl:block">
+      <Slide v-for="product in bestSellingProducts" :key="product.id"
+        class="border-t border-b border-l last:border-r border-default-100"
+      >
+        <ProductVerticalItem
+          class="p-7 hover:bg-primary-50"
+          :key="product.id"
+          :id="product.id"
+          :slug="product.slug"
+          :thumbnail="product.thumbnail?.url"
+          :name="product.name"
+          :sale-price="product.sale_price"
+          thumbnail-style="bg-transparent"
+          :can-add-to-cart="true"
+        />
+      </Slide>
+
+      <template #addons="{ slidesCount }">
+        <Navigation v-if="slidesCount > 1" />
+      </template>
+    </Carousel>
   </section>
 </template>
