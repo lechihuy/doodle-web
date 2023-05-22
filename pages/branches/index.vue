@@ -40,10 +40,8 @@ watch(searchInput, () => {
 
 <template>
   <div class="max-h-48 w-full relative overflow-hidden">
-    <div class="flex items-center justify-center absolute inset-0 bg-black/60">
-      <span class="text-white font-extrabold text-2xl sm:text-3xl"
-        >Hệ thống {{ count.total }} cửa hàng Doodle toàn quốc</span
-      >
+    <div class="flex items-center justify-center absolute inset-0 bg-black/60 px-3">
+      <span class="text-white font-extrabold text-2xl sm:text-3xl">Hệ thống {{ count.total }} cửa hàng Doodle toàn quốc</span>
     </div>
     <nuxt-img
       src="/images/supermarket-branch-banner.jpeg"
@@ -78,9 +76,9 @@ watch(searchInput, () => {
 
       <div class="flex flex-col divide-y divide-default-200 divide-dashed">
         <div v-for="branch in branches" :key="branch.id" class="flex flex-col xl:flex-row py-5 xl:items-center gap-5 xl:gap-10">
-          <Carousel class="h-64  w-full xl:max-w-lg rounded-lg ring-1 ring-default-100 overflow-hidden" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
+          <Carousel class="h-64 w-full xl:max-w-lg rounded-lg ring-1 ring-default-100 overflow-hidden" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
             <Slide :key="0">
-              <nuxt-img :src="branch.thumbnail.url" class="h-full pointer-events-none" />
+              <nuxt-img :src="branch.thumbnail.url" class="h-full pointer-events-none object-contain" />
             </Slide>
             <Slide :key="1">
               <div class="relative w-full h-64 z-[1] rounded-lg overflow-hidden" v-if="branch.address.lat && branch.address.lng">
