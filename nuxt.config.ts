@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: 'Doodle',
-      baseApiUrl: process.env.NUXT_PUBLIC_BASE_URL
+      baseApiUrl: process.env.NUXT_PUBLIC_BASE_URL ? process.env.NUXT_PUBLIC_BASE_URL : 'https://api.doodlevn.xyz'
     },
   },
   modules: [
