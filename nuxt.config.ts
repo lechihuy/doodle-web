@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: 'Doodle',
-      baseApiUrl: ''
+      baseApiUrl: process.env.BASE_API_URL
     },
   },
   modules: [
