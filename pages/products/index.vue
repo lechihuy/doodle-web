@@ -29,8 +29,8 @@ watch([filter, sorter], () => {
 <template>
   <NuxtLayout name="product-collection">
     <div class="px-3 lg:px-7 p-7">
-      <h1 class="text-3xl flex items-center font-bold text-default-700">Tất cả sản phẩm
-        <div class="ml-auto -mr-3 lg:-mr-7">
+      <h1 class="text-3xl flex gap-3 flex-col sm:flex-row sm:items-center font-bold text-default-700">Tất cả sản phẩm
+        <div class="sm:ml-auto -mr-3 lg:-mr-7">
           <ProductSorter v-model="sorter" />
         </div>
       </h1>
@@ -53,7 +53,7 @@ watch([filter, sorter], () => {
       />
     </div>
 
-    <div class="p-7 flex items-center text-sm">
+    <div class="p-7 flex flex-col gap-7 sm:flex-row justify-center items-center text-sm">
       <div class="text-default-700">
         {{ products.meta.from }}-{{ products.meta.to }} trên tổng
         {{ products.meta.total }} sản phẩm.

@@ -78,7 +78,7 @@ watch(route, () => {
               class="w-full max-w-xl transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all"
             >
               <div class="relative">
-                <input type="text" v-model="keyword" @keyup="search" class="form-input pl-11 px-5 py-3 rounded-t-lg rounded-b-none border-none" placeholder="Tìm kiếm sản phẩm, thương hiệu...">
+                <input type="text" spellcheck="false" v-model="keyword" @keyup="search" class="form-input pl-11 px-5 py-3 rounded-t-lg rounded-b-none border-none" placeholder="Tìm kiếm sản phẩm, thương hiệu...">
                 <Icon name="heroicons:magnifying-glass" class="w-5 h-5 absolute left-3 top-3.5" /> 
               </div>
 
@@ -115,10 +115,10 @@ watch(route, () => {
                 <div v-if="products.length > 0">
                   <div class="bg-default-50 tracking-wider uppercase text-xs font-semibold px-5 py-1 border-t border-b border-default-100">Sản phẩm</div>
                   <div class="flex flex-col divide-y divide-default-100">
-                    <NuxtLink v-for="product in products" :key="product.id" class="flex items-center px-5 py-1.5 hover:bg-primary-50">
-                      <nuxt-img :src="product.thumbnail.url" class="w-20 h-20 rounded-md" />
+                    <NuxtLink :to="{ name: 'products-product', params: { product: product.slug } }" v-for="product in products" :key="product.id" class="flex items-center px-5 py-1.5 hover:bg-primary-50">
+                      <nuxt-img :src="product.thumbnail.url" class="w-20 h-20 bg-default-100 rounded-md" />
                       
-                      <div class="flex flex-col gap-3 px-7">
+                      <div class="flex flex-col gap-1 px-7">
                         <p class="text-default-700 line-clamp-2">
                           {{ product.name }}
                         </p>

@@ -28,6 +28,7 @@ async function logout() {
 </script>
 
 <template>
+
   <div
     v-if="route.name !== 'index'"
     class="absolute z-[1] inset-x-0 flex justify-center overflow-hidden pointer-events-none"
@@ -217,9 +218,55 @@ async function logout() {
             </transition>
           </HeadlessMenu>
 
-          <a class="block lg:hidden cursor-pointer">
-            <Icon name="heroicons:bars-3" class="w-6 h-6 hover:text-primary-500" />
-          </a>
+          <HeadlessMenu
+            as="div"
+            class="relative lg:hidden"
+          >
+            <HeadlessMenuButton
+              class="cursor-pointer focus:outline-none text-default-700 flex items-center gap-1 hover:text-primary-500"
+            >
+              <Icon name="heroicons:bars-3" class="w-7 h-7" />
+            </HeadlessMenuButton>
+
+            <transition
+              enter-active-class="transition duration-100 ease-out"
+              enter-from-class="transform scale-95 opacity-0"
+              enter-to-class="transform scale-100 opacity-100"
+              leave-active-class="transition duration-75 ease-in"
+              leave-from-class="transform scale-100 opacity-100"
+              leave-to-class="transform scale-95 opacity-0"
+            >
+              <HeadlessMenuItems
+                class="absolute divide-y divide-default-100 right-0 mt-4 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              >
+                <div class="py-1">
+                  <HeadlessMenuItem v-slot="{ active }">
+                    <div
+                      :class="[
+                        active ? 'bg-default-100' : '',
+                        'group flex w-full items-center px-2 py-2 gap-2 text-sm',
+                      ]"
+                    >
+                      Về chúng tôi
+                    </div>
+                  </HeadlessMenuItem>
+
+                  <HeadlessMenuItem v-slot="{ active }">
+                    <div
+                      @click="navigateTo({ name: 'branches' })"
+                      :class="[
+                        active ? 'bg-default-100' : '',
+                        'group flex w-full items-center px-2 py-2 gap-2 text-sm cursor-pointer',
+                      ]"
+                    >
+                      Cửa hàng
+                    </div>
+                  </HeadlessMenuItem>
+
+                </div>
+              </HeadlessMenuItems>
+            </transition>
+          </HeadlessMenu>
         </div>
       </div>
     </div>

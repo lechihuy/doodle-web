@@ -4,6 +4,7 @@ onBeforeMount(() => {
 })
 
 useHead({
+  titleTemplate: (title) => `${title} | Doodle`,
   bodyAttrs: {
   },
   link: [

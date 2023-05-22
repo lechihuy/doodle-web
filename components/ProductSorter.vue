@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import theme from 'tailwindcss/defaultTheme';
+
 const props = defineProps({
   modelValue: { type: Object },
 });
@@ -28,7 +30,7 @@ watch (mode, () => {
 </script>
 
 <template>
-  <HeadlessListbox v-model="mode" as="div" class="relative z-[1] font-normal">
+  <HeadlessListbox v-model="mode" as="div" class="relative font-normal inline-block">
     <HeadlessListboxButton
       class="w-full cursor-default flex items-center rounded-lg bg-white btn btn-transparent text-sm"
     >
@@ -50,7 +52,8 @@ watch (mode, () => {
       leave-to-class="opacity-0"
     >
       <HeadlessListboxOptions
-        class="absolute mt-1 z-[1] w-52 right-0 bg-white overflow-auto rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        class="absolute mt-1 z-[1] w-52 left-0 sm:right-0 sm:left-auto bg-white overflow-auto rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm"
+        :style="{ zIndex: zIndex.dropdown }"
       >
         <HeadlessListboxOption
           v-slot="{ active, selected }"
