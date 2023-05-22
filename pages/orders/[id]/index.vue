@@ -198,7 +198,7 @@ async function rateOrder(order: any) {
         <p v-if="order.note">{{ order.note }}</p>
         <p v-else class="text-default-500">&mdash;</p>
       </div>
-      <div class="py-7 flex flex-col gap-2">
+      <div class="py-7 flex flex-col gap-2" v-if="order.ratable || order.rating">
         <label class="font-semibold">Đánh giá</label>
         <div v-if="order.rating" class="flex flex-col gap-2">
           <div class="flex items-center gap-1">
@@ -216,6 +216,7 @@ async function rateOrder(order: any) {
           </div>
           <p v-if="order.feedback" class="italic">"{{ order.feedback }}"</p>
         </div>
+
         <div v-else>
           <button type="button" class="btn btn-transparent btn-sm" @click="rateOrder(order)">
             <Icon name="heroicons:star-solid" class="w-5 h-5 text-yellow-500" /> Đánh giá
