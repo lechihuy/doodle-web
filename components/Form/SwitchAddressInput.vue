@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+const props = defineProps({
+  fullSize: { type: Boolean, default: false, }
+})
 const currentCustomer = useCurrentCustomer()
 const addresses = ref((await useIndexAddressApi()).data.data)
 const selectedAddress = ref(currentCustomer.value.cart.address)
@@ -42,6 +45,7 @@ async function setCartAddress(addressId: number) {
     >
       <HeadlessListboxOptions
         class="absolute divide-y divide-default-100 mt-2 w-72 lg:w-full -left-1/2 xs:left-auto right-0 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        :class="{ 'w-full !left-0': fullSize }"
       >
         <div class="py-1">
           <HeadlessListboxOption v-for="address in addresses" :key="address.id" v-slot="{ active, selected }" :value="address">

@@ -9,7 +9,7 @@ const currentCustomer = useCurrentCustomer();
 
 <template>
   <div
-    class="jumbotron relative bg-bottom bg-no-repeat bg-default-50 -mt-24 pt-44 pb-20"
+    class="jumbotron relative bg-bottom bg-no-repeat bg-default-50 -mt-16 pt-36 pb-20"
   >
     <div
       class="absolute inset-0 bg-grid-default-900 bg-[bottom_1px_center]"
@@ -34,29 +34,27 @@ const currentCustomer = useCurrentCustomer();
           Mua sắm tạp hóa trực tuyến dễ dàng và tiện lợi hơn bao giờ hết, chúng
           tôi tin tưởng rằng sự tiện lợi và chất lượng sẽ làm hài lòng các bạn.
         </p>
-        <div class="flex items-center justify-center lg:justify-start gap-2">
-          <NuxtLink :to="{ name: 'products' }" class="btn btn-primary btn-large flex-none">
-            Khám phá <span class="hidden xs:inline-block">sản phẩm</span>
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2">
+          <NuxtLink :to="{ name: 'products' }" class="btn btn-primary btn-large block w-full sm:inline-block sm:w-auto">
+            Khám phá sản phẩm
             <Icon name="heroicons:arrow-right" class="w-4 h-4" />
           </NuxtLink>
 
-          <MagicButton v-if="currentCustomer">
+          <MagicButton v-if="currentCustomer" class="block w-full sm:inline-block sm:w-auto">
             <NuxtLink
               :to="{ name: 'profile' }"
-              class="btn btn-transparent btn-large flex-none"
+              class="btn btn-transparent btn-large"
             >
-              <span class="hidden xs:inline-block">Đi tới hồ sơ</span>
-              <span class="xs:hidden">Hồ sơ</span>
+              <span class="">Đi tới hồ sơ</span>
               <Icon name="heroicons:arrow-right" class="w-4 h-4" />
             </NuxtLink>
           </MagicButton>
-          <MagicButton v-else>
+          <MagicButton v-else class="block w-full sm:inline-block sm:w-auto">
             <NuxtLink
-              class="btn btn-transparent btn-large flex-none"
+              class="btn btn-transparent btn-large"
               :to="{ name: 'login' }"
             >
-              <span class="hidden xs:inline-block">Trở thành khách hàng</span>
-              <span class="xs:hidden">Khách hàng</span>
+              <span class="">Trở thành khách hàng</span>
               <Icon name="heroicons:arrow-right" class="w-4 h-4" />
             </NuxtLink>
           </MagicButton>

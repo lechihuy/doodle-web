@@ -139,7 +139,7 @@ async function checkout() {
           <div class="divide-y divide-default-100">
             <div class="py-7 flex flex-col gap-2">
               <label class="font-semibold">Chọn địa chỉ</label>
-              <FormSwitchAddressInput class="w-full" />
+              <FormSwitchAddressInput class="w-full" :full-size="true" />
             </div>
             <div class="py-7 flex flex-col gap-2">
               <label class="font-semibold">Người nhận hàng</label>
@@ -173,14 +173,14 @@ async function checkout() {
           </div>
           <h3 class="text-xl font-semibold text-default-700 mt-10 mb-3">Hãy chọn sản phẩm đầu tiên vào giỏ hàng.</h3>
           <p class="text-default-500">Bạn hãy lựa chọn những sản phẩm mong muốn rồi quay lại giỏ hàng bất cứ khi nào bạn muốn thực hiện thanh toán.</p>
-          <div class="flex justify-center mt-10 items-center gap-3">
-            <NuxtLink :to="{ name: 'index' }">
-              <button type="button" class="btn btn-transparent btn-large">
+          <div class="flex flex-col xs:flex-row justify-center mt-10 items-center gap-3">
+            <NuxtLink :to="{ name: 'index' }" class="block w-full order-2 xs:order-1">
+              <button type="button" class="btn btn-block btn-transparent btn-large">
                 Trở về trang chủ
               </button>
             </NuxtLink>
-            <NuxtLink :to="{ name: 'products' }">
-              <button type="button" class="btn btn-large btn-primary">
+            <NuxtLink :to="{ name: 'products' }" class="block w-full order-1 xs:order-2">
+              <button type="button" class="btn btn-block btn-large btn-primary">
                 Khám phá sản phẩm
               </button>
             </NuxtLink>

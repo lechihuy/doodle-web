@@ -46,11 +46,11 @@ function redirectTo(to: any) {
                 <p class="text-center text-default-500">Để có thể tiếp tục sử dụng tính năng này, vui lòng đăng nhập tài khoản khách hàng.</p>
               </div>
 
-              <div class="p-7 pt-0 flex items-center justify-center gap-2">
-                <MagicButton>
-                  <button type="button" class="btn btn-transparent" @click="redirectTo({ name: 'register' })">Tạo tài khoản</button>
+              <div class="p-7 pt-0 flex flex-col xs:flex-row items-center justify-center gap-2">
+                <MagicButton class="block w-full order-2 xs:order-1">
+                  <button type="button" class="btn btn-transparent btn-block" @click="redirectTo({ name: 'register' })">Tạo tài khoản</button>
                 </MagicButton>
-                <button type="button" class="btn btn-primary" @click="redirectTo({ name: 'login' })">
+                <button type="button" class="order-1 btn btn-primary btn-block" @click="redirectTo({ name: 'login' })">
                   Đăng nhập ngay
                 </button>
               </div>
