@@ -77,6 +77,14 @@ async function logout() {
 
           <NuxtLink
             class="cursor-pointer text-default-700 font-semibold hover:text-primary-500 hidden lg:block"
+            :to="{ name: 'products' }"
+            exact-active-class="text-primary-500"
+          >
+            Sản phẩm
+          </NuxtLink>
+
+          <NuxtLink
+            class="cursor-pointer text-default-700 font-semibold hover:text-primary-500 hidden lg:block"
           >
             Về chúng tôi
           </NuxtLink>
@@ -240,6 +248,18 @@ async function logout() {
                 class="absolute divide-y divide-default-100 right-0 mt-4 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div class="py-1">
+                  <HeadlessMenuItem v-slot="{ active }">
+                    <div
+                      :class="[
+                        active ? 'bg-default-100' : '',
+                        'group flex w-full items-center px-2 py-2 gap-2 text-sm',
+                      ]"
+                      @click="navigateTo({ name: 'products' })"
+                    >
+                      Sản phẩm
+                    </div>
+                  </HeadlessMenuItem>
+
                   <HeadlessMenuItem v-slot="{ active }">
                     <div
                       :class="[

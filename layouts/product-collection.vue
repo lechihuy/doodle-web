@@ -19,7 +19,6 @@ const { data: productGroups } = useAsyncData<any>('product-groups',
           <HeadlessMenu
             as="div"
             class="relative lg:hidden"
-            :style="{ zIndex: zIndex.dropdown }"
           >
             <HeadlessMenuButton
               class="cursor-pointer focus:outline-none text-default-700 flex items-center gap-1 hover:text-primary-500"
