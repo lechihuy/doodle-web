@@ -15,6 +15,10 @@ const { data: product, error } = await useAsyncData(
   async () => (await useDetailProductApi(slug)).data.data,
 )
 
+useHead({
+  title: product.value?.name
+})
+
 if (error.value) {
   showError(createError({ statusCode: 404 }))
 }
@@ -39,7 +43,7 @@ if (error.value) {
             </div>
             <div class="flex items-center gap-3">
               <Icon name="mdi:package" class="w-6 h-6 text-primary-500" />
-              <span>Giao hàng tận tay dù chỉ là 1 đơn hàng</span>
+              <span>Giao hàng tận tay dù chỉ là 1 sản phẩm</span>
             </div>
           </div>
         </div>

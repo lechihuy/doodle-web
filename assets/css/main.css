@@ -164,7 +164,3 @@
 .carousel__next:hover {
     @apply !text-primary-500
 }
-
-.swiper-wrapper {
- @apply !items-stretch
-}

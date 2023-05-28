@@ -32,6 +32,7 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
+    '~/plugins/scroll-top.ts',
     '~/plugins/lodash.ts',
     '~/plugins/error-global.ts',
     '~/plugins/axios.ts',

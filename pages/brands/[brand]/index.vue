@@ -27,6 +27,10 @@ const { data: brand } = await useAsyncData(
     (await useDetailBrandApi(slug)).data.data,
 )
 
+useHead({
+  title: brand.value?.name
+})
+
 filter.value.brand_id = brand.value.id
 
 const { data: products } = await useAsyncData(

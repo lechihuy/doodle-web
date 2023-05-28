@@ -8,7 +8,7 @@ const { data: latestProducts } = await useAsyncData<any>('latestProducts',
 </script>
 
 <template>
-  <section class="pt-20 relative border-t border-slate-900/[0.07] mt-10">
+  <section class="pt-20 relative border-t border-slate-900/[0.07] mt-10 -mb-10">
     <div class="absolute inset-0 text-slate-900/[0.07] [mask-image:linear-gradient(to_bottom,white,transparent)]">
       <svg class="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
         <defs>

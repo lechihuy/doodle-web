@@ -1,7 +1,12 @@
 <script lang="ts" setup>
-const { data: randomProducts } = await useAsyncData<any>(
-  "randomProducts",
-  async () => (await useIndexProductLensApi(PRODUCT_LENS.random)).data.data
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
+const { $axios } = useNuxtApp()
+
+const { data: meta } = await useAsyncData<any>(
+  "meta",
+  async () => (await $axios.get(`public/meta`)).data.data
 );
 
 const currentCustomer = useCurrentCustomer();
@@ -20,7 +25,7 @@ const currentCustomer = useCurrentCustomer();
     ></div>
 
     <div
-      class="grid grid-cols-1 lg:grid-cols-2 container mx-auto px-3 relative gap-10 content-center mb-20"
+      class="flex flex-col lg:flex-row container mx-auto px-3 relative gap-10 items-center"
     >
       <div
         class="flex flex-col gap-7 place-content-center text-center lg:text-left"
@@ -60,6 +65,18 @@ const currentCustomer = useCurrentCustomer();
           </MagicButton>
         </div>
       </div>
+      
+      <Carousel class="w-full rounded-lg overflow-hidden shadow-xl" :pauseAutoplayOnHover="true" :autoplay="2000" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
+        <Slide v-for="voucher in meta.available_vouchers" :key="voucher.id">
+          <NuxtLink :to="{ name: 'products' }" class="block h-full w-full">
+            <nuxt-img :src="voucher.thumbnail.url" class="h-full w-full object-contain" />
+          </NuxtLink>
+        </Slide>
+        <template #addons="{ slidesCount }">
+          <Pagination />
+          <Navigation v-if="slidesCount > 1" />
+        </template>
+      </Carousel>
     </div>
   </div>
 </template>

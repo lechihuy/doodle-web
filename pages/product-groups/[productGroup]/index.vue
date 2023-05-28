@@ -4,6 +4,7 @@ definePageMeta({
   middleware: ["optional-auth"],
 });
 
+
 const route = useRoute()
 const slug = route.params.productGroup as string
 
@@ -26,6 +27,10 @@ const { data: productGroup } = await useAsyncData(
   async () =>
     (await useDetailProductGroupApi(slug)).data.data,
 )
+
+useHead({
+  title: productGroup.value?.name
+})
 
 filter.value.product_group_ids.push(productGroup.value.id)
 

@@ -4,6 +4,10 @@ definePageMeta({
   middleware: ["optional-auth"],
 });
 
+useHead({
+  title: 'Sản phẩm'
+})
+
 const filter = ref<ProductFilter>({
   keyword: "",
   page: 1,
