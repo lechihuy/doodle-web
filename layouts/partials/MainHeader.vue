@@ -101,7 +101,7 @@ async function logout() {
         <div class="w-[1px] h-6 bg-default-300 hidden lg:block"></div>
 
         <div class="flex items-center gap-5 sm:gap-7">
-          <FormSwitchAddressInput v-if="currentCustomer && currentCustomer?.cart.address_id && route.name !== 'cart'" class="w-32 xs:w-52 lg:w-72" />
+          <FormSwitchAddressInput v-if="currentCustomer && currentCustomer?.cart.address_id && route.name !== 'cart'" class="w-32 xs:w-52 lg:w-60" />
 
           <NuxtLink
             v-if="currentCustomer && cart.data"
