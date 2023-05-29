@@ -13,7 +13,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
   <div class="background">
     <section class="container mx-auto px-3 py-20 flex flex-col gap-6">
     
-      <h3 class="font-extrabold text-2xl xs:text-3xl text-default-700 justify-center flex items-center gap-2 relative">
+      <h3 class="font-extrabold text-2xl xs:text-3xl text-default-700 justify-center flex items-center gap-2 leading-7 relative">
         <Icon name="noto:fire" class="w-10 h-10 text-danger-500 tracking-wider" />
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-600 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0)]">Sản phẩm bán chạy</span>
       </h3>

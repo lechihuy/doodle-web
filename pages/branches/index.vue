@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import MainFooter from '~/layouts/partials/MainFooter.vue'
+import MainFooter from '~/components/MainFooter.vue'
 import 'vue3-carousel/dist/carousel.css'
 
 definePageMeta({
@@ -105,4 +105,5 @@ watch(searchInput, () => {
       </div>
     </div>
   </div>
+  <MainFooter />
 </template>

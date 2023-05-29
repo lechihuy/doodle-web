@@ -75,4 +75,5 @@ async function submitEditProfile() {
       </div>
     </form>
   </div>
+  
 </template>

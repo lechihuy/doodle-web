@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-const route = useRoute()
-
 const { data: productGroups } = useAsyncData<any>('product-groups',
   async () => (await useIndexProductGroupsApi(
     { per_page: 0 },
@@ -21,11 +19,9 @@ const { data: productGroups } = useAsyncData<any>('product-groups',
             class="relative lg:hidden"
           >
             <HeadlessMenuButton
-              class="cursor-pointer focus:outline-none text-default-700 flex items-center gap-1 hover:text-primary-500"
+              class="btn btn-transparent"
             >
-              <button type="button" class="btn btn-transparent">
-                <Icon name="heroicons:bars-3" class="w-5 h-5" /> Danh mục sản phẩm
-              </button>
+              <Icon name="heroicons:bars-3" class="w-5 h-5" /> Danh mục sản phẩm
             </HeadlessMenuButton>
 
             <transition
@@ -95,6 +91,8 @@ const { data: productGroups } = useAsyncData<any>('product-groups',
       </div>
     </div>
   </div>
+
+  <MainFooter />
 </template>
 
 <style lang="scss" scoped>

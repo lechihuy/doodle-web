@@ -8,12 +8,6 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    [
-      'nuxt-swiper',
-      {
-        
-      }
-    ],
     '@nuxt/image-edge',
     'nuxt-headlessui',
     'nuxt-icon',
@@ -32,7 +26,6 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
-    '~/plugins/scroll-top.ts',
     '~/plugins/lodash.ts',
     '~/plugins/error-global.ts',
     '~/plugins/axios.ts',

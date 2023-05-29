@@ -12,8 +12,8 @@ function navigate(to: any) {
 <template>
   <MainHeader />
 
-  <div class="relative">
-    <div class="flex flex-col lg:flex-row container mx-auto min-h-[calc(100vh_-_theme(space.16))] lg:divide-x divide-default-900/10">
+  <div class="relative min-h-[calc(100vh_-_theme(space.16))] flex flex-col">
+    <div class="flex flex-col lg:flex-row container mx-auto min-h-full grow lg:divide-x divide-default-900/10">
       <div class="w-full lg:w-72 pt-3 lg:pt-7 px-3">
         <div class="lg:sticky lg:top-24 flex flex-col gap-5">
           <div class="flex items-center gap-5 border-b border-default-500/10 pb-3">
@@ -149,5 +149,8 @@ function navigate(to: any) {
         <slot />        
       </div>
     </div>
+
+
+    <MainFooter />
   </div>
 </template>

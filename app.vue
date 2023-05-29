@@ -10,7 +10,7 @@ useHead({
   link: [
     { rel: 'icon', type: 'image/x-icon', href: '/images/doodle.ico' },
     { rel: 'apple-touch-icon', href: '/images/doodle.ico', sizes: '512x512' }
-  ]
+  ],
 })
 
 const currentCustomer = useCurrentCustomer()
