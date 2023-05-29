@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>   
-    <div class="container mx-auto px-3  mt-10 text-default-100 text-xs">
+    <div class="container mx-auto px-3 mt-10 text-default-100 text-xs">
       <div class="border-t border-default-900/30 py-3">
         Bản quyền thuộc Doodlevn &copy; 2023.
       </div>
