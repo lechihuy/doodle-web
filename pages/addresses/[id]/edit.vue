@@ -209,7 +209,7 @@ function openDeleteConfirmationModal() {
           Cập nhật
         </button>
 
-        <a @click="openDeleteConfirmationModal" class="ml-auto flex items-center gap-2 text-default-500 hover:cursor-pointer hover:text-danger-500">
+        <a @click="openDeleteConfirmationModal" v-if="address.deletable" class="ml-auto flex items-center gap-2 text-default-500 hover:cursor-pointer hover:text-danger-500">
           <Icon name="heroicons:trash" class="w-5 h-5" /> Xóa
         </a>
       </div>

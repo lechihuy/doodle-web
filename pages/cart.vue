@@ -43,7 +43,7 @@ async function checkout() {
       </div>
     </template>
 
-    <div class="relative">
+    <div v-if="cart.data.address" class="relative">
       <div v-if="cart.count > 0" class="flex mb-16 flex-col lg:flex-row container px-3 mx-auto min-h-[calc(100vh_-_theme(space.32))] lg:divide-x divide-default-900/10">
         <div class="grow py-7 lg:pr-7">
           <h3 class="text-2xl font-light">Giỏ hàng</h3>
@@ -188,8 +188,35 @@ async function checkout() {
         </div>
       </div>
     </div>
+    <div v-else class="flex container px-3 mx-auto justify-center min-h-[calc(100vh_-_theme(space.16))] items-center">
+        <div class="w-full max-w-md text-center flex flex-col">
+          <div class="w-full flex items-center justify-center relative">
+            <div
+              class="absolute inset-0 bg-grid-default-900 bg-[bottom_1px_center]"
+              style="
+                -webkit-mask-image: linear-gradient(to bottom, transparent, black, transparent);
+              "
+            ></div>
+            <Icon name="heroicons:map-pin" class="w-32 h-32 text-default-500" />
+          </div>
+          <h3 class="text-xl font-semibold text-default-700 mt-10 mb-3">Hãy thêm địa chỉ nhận hàng đầu tiên</h3>
+          <p class="text-default-500">Với địa chỉ nhận hàng, hệ thống sẽ tính toán chi nhánh gần nhất giúp bạn tiết kiệm tối đa chi phí vận chuyển.</p>
+          <div class="flex flex-col xs:flex-row justify-center mt-10 items-center gap-3">
+            <NuxtLink :to="{ name: 'index' }" class="block w-full order-2 xs:order-1">
+              <button type="button" class="btn btn-block btn-transparent btn-large">
+                Để sau
+              </button>
+            </NuxtLink>
+            <NuxtLink :to="{ name: 'addresses-create' }" class="block w-full order-1 xs:order-2">
+              <button type="button" class="btn btn-block btn-large btn-primary">
+                Thêm ngay
+              </button>
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
 
-    <div v-if="cart.count > 0" class="fixed bottom-0 w-full h-16 border-t border-default-100 bg-default-50" :style="{ zIndex: zIndex.modal }">
+    <div v-if="cart.data.address && cart.count > 0" class="fixed bottom-0 w-full h-16 border-t border-default-100 bg-default-50" :style="{ zIndex: zIndex.modal }">
       <div class="flex items-center h-full justify-end gap-5 container px-3 mx-auto">
         <div class="flex items-center gap-2">
           <p class="text-sm font-semibold text-default-700">Tổng:</p>

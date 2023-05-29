@@ -4,8 +4,8 @@ const props = defineProps({
 })
 const currentCustomer = useCurrentCustomer()
 const addresses = ref((await useIndexAddressApi()).data.data)
-const selectedAddress = ref(currentCustomer.value.cart.address)
 const cart = useCart()
+const selectedAddress = ref(cart.data.address)
 
 async function setCartAddress(addressId: number) {
   await useEditCartApi({ address_id: addressId })

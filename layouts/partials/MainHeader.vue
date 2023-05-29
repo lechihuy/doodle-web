@@ -25,6 +25,8 @@ async function logout() {
 
   return navigateTo({ name: "login" });
 }
+
+console.log(cart.data)
 </script>
 
 <template>
