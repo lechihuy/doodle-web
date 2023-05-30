@@ -39,7 +39,7 @@ watch (cart, () => {
       class="cursor-pointer focus:outline-none gap-2 px-2 bg-default-50 w-full py-1 rounded-full text-sm ring-1 ring-default-200 text-default-700 flex items-center"
     >
       <div class="w-8 h-8 flex-none rounded-full bg-white ring-1 ring-default-500/10 flex items-center justify-center">
-        <Icon name="noto-v1:convenience-store" class="w-5 h-5 transform -scale-x-100" />
+        <Icon name="noto-v1:convenience-store" class="w-5 h-5" />
       </div>
 
       <div class="flex flex-col gap-0.5 text-left">
