@@ -7,6 +7,8 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
     range: 'month'
   })).data.data
 )
+
+console.log(bestSellingProducts.value)
 </script>
 
 <template>

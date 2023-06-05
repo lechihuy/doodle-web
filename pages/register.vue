@@ -30,6 +30,11 @@ async function submit() {
   }, { 'OTP-Token': otpToken.value })
     .then(res => {
       toast.success('Chào mừng bạn đã trở thành thành viên của Doodle!')
+      const data = res.data.data
+      const accessToken = useCookie<string>('access_token', { expires: new Date(data.expires_at) })
+      accessToken.value = data.access_token
+
+      navigateTo({ name: 'index' })
     })
     .catch(err => {
       if (err.response.status === 419) otpToken.value = ''
