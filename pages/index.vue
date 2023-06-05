@@ -8,7 +8,7 @@ useHead({ title: 'Mở rộng thế giới mua sắm của bạn' })
 </script>
 
 <template>
-  <Jumbotron />
+  <HeroSlider />
 
   <BestSellingSection />
 

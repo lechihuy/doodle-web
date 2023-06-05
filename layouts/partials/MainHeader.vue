@@ -42,13 +42,13 @@ async function logout() {
   </div>
 
   <header
-    class="sticky backdrop-blur transition-colors duration-300 inset-0 h-16"
+    class="sticky backdrop-blur transition-colors duration-300 inset-0 h-16 border-b border-default-900/10"
     :class="[
       headerIsSticked
-        ? '!bg-white/95 !supports-backdrop-blur:bg-white/60 border-b border-default-900/10'
+        ? '!bg-white/95 !supports-backdrop-blur:bg-white/60'
         : route.name === 'index'
           ? 'bg-transparent'
-          : 'bg-white/60 supports-backdrop-blur:bg-white/60 border-b border-default-900/10',
+          : 'bg-white/60 supports-backdrop-blur:bg-white/60',
     ]"
     :style="{ zIndex: zIndex.mainHeader }"
   >
