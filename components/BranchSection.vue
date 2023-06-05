@@ -27,8 +27,8 @@ const { data: branches } = useAsyncData(
         </div>
       </div>
 
-      <div>
-        <Carousel class="w-full rounded-lg overflow-hidden shadow-xl" :pauseAutoplayOnHover="true" :autoplay="2000" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
+      <div class="relative">
+        <Carousel class="w-full aspect-[2/1] absolute rounded-lg overflow-hidden shadow-xl" :pauseAutoplayOnHover="true" :autoplay="2000" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
           <Slide v-for="branch in branches" :key="branch.id">
             <nuxt-img :src="branch.thumbnail.url" class="h-full object-contain" />
           </Slide>
