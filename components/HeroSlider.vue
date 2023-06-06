@@ -13,7 +13,7 @@ const currentCustomer = useCurrentCustomer();
 </script>
 
 <template>
-  <Carousel class="w-full overflow-hidden aspect-[16_/_4]" :autoplay="5000" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
+  <Carousel class="w-full overflow-hidden aspect-[16/4]" :autoplay="5000" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
     <Slide v-for="voucher in meta.available_vouchers" :key="voucher.id">
       <NuxtLink :to="{ name: 'products' }" class="block">
         <nuxt-img :src="voucher.thumbnail.url" class="object-contain" />

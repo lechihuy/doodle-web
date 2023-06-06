@@ -11,8 +11,6 @@ const { data: productGroups } = useAsyncData<any>('product-groups',
   <div class="relative">
     <div class="flex flex-col lg:flex-row container mx-auto min-h-[calc(100vh_-_theme(space.16))] lg:divide-x divide-default-100">
       <div class="w-full lg:w-72 flex-none pt-3 lg:pt-7 px-3 flex flex-col gap-5">
-        <h3 class="hidden lg:block font-bold tracking-wide">Danh mục sản phẩm</h3>
-
         <div class="block lg:hidden">
           <HeadlessMenu
             as="div"
@@ -69,7 +67,9 @@ const { data: productGroups } = useAsyncData<any>('product-groups',
           </HeadlessMenu>
         </div>
 
-        <nav class="hidden lg:flex flex-col divide-y divide-dashed divide-default-500/10">
+        <nav class="hidden sticky top-24 bg-default-50 p-5 rounded-lg lg:flex flex-col divide-y divide-dashed divide-default-500/10">
+          <h3 class="font-bold tracking-wide mb-5">Danh mục sản phẩm</h3>
+
           <div class="py-2 block">
             <NuxtLink :to="{ name: 'products' }" exact-active-class="active-nav">
               Tất cả

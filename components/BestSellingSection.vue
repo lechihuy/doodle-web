@@ -27,7 +27,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-600 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0)]">Sản phẩm bán chạy</span>
       </h3>
 
-      <Carousel :items-to-show="1.5" snap-align="start" :autoplay="2000" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="block rounded-xl overflow-hidden bg-white md:hidden shadow-xl">
+      <Carousel :items-to-show="1.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="block rounded-xl overflow-hidden bg-white md:hidden shadow-xl">
         <Slide v-for="product in bestSellingProducts" :key="product.id"
           class="border-l last:border-r border-default-100"
         >
@@ -49,7 +49,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
         </template>
       </Carousel>
 
-      <Carousel :items-to-show="2.5" snap-align="start" :autoplay="2000" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="2.5" class="hidden rounded-xl overflow-hidden md:block bg-white lg:hidden shadow-xl">
+      <Carousel :items-to-show="2.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="2.5" class="hidden rounded-xl overflow-hidden md:block bg-white lg:hidden shadow-xl">
         <Slide v-for="product in bestSellingProducts" :key="product.id"
           class="border-l last:border-r border-default-100"
         >
@@ -71,7 +71,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
         </template>
       </Carousel>
 
-      <Carousel :items-to-show="3.5" snap-align="start" :autoplay="2000" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="hidden rounded-xl overflow-hidden lg:block bg-white xl:hidden shadow-xl">
+      <Carousel :items-to-show="3.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="hidden rounded-xl overflow-hidden lg:block bg-white xl:hidden shadow-xl">
         <Slide v-for="product in bestSellingProducts" :key="product.id"
           class="border-l last:border-r border-default-100"
         >
@@ -93,7 +93,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
         </template>
       </Carousel>
 
-      <Carousel :items-to-show="5" snap-align="start" :autoplay="2000" :pause-autoplay-on-hover="true" :wrap-around="true" class="hidden rounded-xl overflow-hidden bg-white xl:block shadow-xl">
+      <Carousel :items-to-show="5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" class="hidden rounded-xl overflow-hidden bg-white xl:block shadow-xl">
         <Slide v-for="product in bestSellingProducts" :key="product.id"
           class="border-l last:border-r border-default-100"
         >
