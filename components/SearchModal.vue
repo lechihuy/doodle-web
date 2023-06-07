@@ -9,7 +9,7 @@ const shown = computed({
   set: (val) => emit('update:shown', val)
 })
 
-const { $lodash } = useNuxtApp()
+const { $lodash, $axios } = useNuxtApp()
 const keyword = ref('')
 const route = useRoute()
 const searchLoading = ref(false)
@@ -20,30 +20,38 @@ function close() {
 
 const brands = ref([])
 const products = ref([])
+const meta = useNuxtData('meta')
 
 const search = async () => {
   if (keyword.value != '') {
     searchLoading.value = true
   }
 
-  await $lodash.debounce(async () => {
-    if (keyword.value == '') {
-      brands.value = []
-      products.value = []
-      searchLoading.value = false
-      return
-    }
+  if (keyword.value == '') {
+    brands.value = []
+    products.value = []
+    searchLoading.value = false
+    return
+  }
 
-    brands.value = (await useIndexBrandsApi({ keyword: keyword.value, limit: 5 })).data.data
-    products.value = (await useIndexProductsApi({ keyword: keyword.value, limit: 5 })).data.data
-    
-    setTimeout(() => searchLoading.value = false, 200)
-  }, 300)()
+  await $axios.get('public/search', {
+    headers: {
+      Accept: 'application/json',
+    },
+    params: {
+      keyword: keyword.value,
+    }
+  }).then(res => {
+    brands.value = res.data.data.brands
+    products.value = res.data.data.products
+  }).finally(() => setTimeout(() => searchLoading.value = false, 200))
 }
 
 watch(route, () => {
   close()
 }, { deep: true })
+
+watch(keyword, $lodash.debounce(search, 300))
 </script>
 
 <template>
@@ -78,10 +86,22 @@ watch(route, () => {
               class="w-full max-w-xl transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all"
             >
               <div class="relative">
-                <input type="text" spellcheck="false" v-model="keyword" @keyup="search" class="form-input pl-11 px-5 py-3 rounded-t-lg rounded-b-none border-none" placeholder="Tìm kiếm sản phẩm, thương hiệu...">
+                <input type="text" spellcheck="false" v-model="keyword" class="form-input pl-11 px-5 py-3 rounded-t-lg rounded-b-none border-none" placeholder="Tìm kiếm sản phẩm, thương hiệu...">
                 <Icon name="heroicons:magnifying-glass" class="w-5 h-5 absolute left-3 top-3.5" /> 
               </div>
 
+              <div v-if="!searchLoading && keyword == ''">
+                <div class="rounded-b-lg">
+                  <div class="border-t border-b border-default-100 bg-default-50 text-xs font-semibold uppercase px-3 py-1">
+                    Từ khóa tìm kiếm hàng đầu
+                  </div>
+                  <div class="divide-y divide-default-100">
+                    <div v-for="query in meta.data.value?.search_queries" :key="query.id" class="text-default-700 px-3 py-2 hover:cursor-pointer hover:bg-primary-50" @click="keyword = query.keyword">
+                      {{ query.keyword }}
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div v-if="searchLoading" class="flex justify-center py-10 bg-white gap-2 items-center border-t border-default-100 text-default-500">
                 <IconLoading class="w-6 h-6" /> Đang tải...
               </div>
