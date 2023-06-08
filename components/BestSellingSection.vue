@@ -20,7 +20,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
         -webkit-mask-image: linear-gradient(to bottom, transparent, black);
       "
     ></div>
-    <section class="container mx-auto px-3 py-20 flex flex-col gap-6">
+    <section class="container mx-auto px-3 py-14 flex flex-col gap-6">
     
       <h3 class="font-extrabold text-2xl xs:text-3xl text-default-700 justify-center flex items-center gap-2 leading-7 relative">
         <Icon name="noto:fire" class="w-10 h-10 text-danger-500 tracking-wider" />

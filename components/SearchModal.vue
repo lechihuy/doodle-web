@@ -51,7 +51,10 @@ watch(route, () => {
   close()
 }, { deep: true })
 
-watch(keyword, $lodash.debounce(search, 300))
+watch(keyword, () => {
+  searchLoading.value = true
+  $lodash.debounce(search, 300)()
+})
 </script>
 
 <template>

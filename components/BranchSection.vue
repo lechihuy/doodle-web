@@ -13,7 +13,7 @@ const { data: branches } = useAsyncData(
 </script>
 
 <template>
-  <section class="bg-primary-50 py-20">
+  <section class="bg-primary-50 py-14">
     <div class="container mx-auto px-3 flex flex-col lg:flex-row gap-20 lg:items-center">
       <div class="flex flex-col gap-3 w-96 max-w-full flex-none">
         <h3 class="text-3xl font-extrabold text-primary-500">Cửa hàng Doodle</h3>

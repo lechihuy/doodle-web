@@ -8,7 +8,7 @@ const { data: latestProducts } = await useAsyncData<any>('latestProducts',
 </script>
 
 <template>
-  <section class="relative py-20">
+  <section class="relative py-14">
     <div class="container px-3 w-full mx-auto">
       <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
         <div class="rounded-full w-16 h-16 bg-primary-500 flex-none flex items-center justify-center border-2 border-primary-500">
