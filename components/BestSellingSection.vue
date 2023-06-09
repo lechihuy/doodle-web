@@ -93,7 +93,7 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
         </template>
       </Carousel>
 
-      <Carousel :items-to-show="5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" class="hidden rounded-xl overflow-hidden bg-white xl:block shadow-xl">
+      <Carousel :items-to-show="6" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" class="hidden rounded-xl overflow-hidden bg-white xl:block shadow-xl">
         <Slide v-for="product in bestSellingProducts" :key="product.id"
           class="border-l last:border-r border-default-100"
         >
