@@ -29,8 +29,12 @@ const { data: branches } = useAsyncData(
 
       <div class="relative">
         <Carousel class="w-full aspect-[2/1] absolute rounded-lg overflow-hidden shadow-xl" :pauseAutoplayOnHover="true" :autoplay="2000" :wrap-around="true" :mouse-drag="false" :touch-drag="false">
-          <Slide v-for="branch in branches" :key="branch.id">
+          <Slide v-for="branch in branches" :key="branch.id" class="relative">
             <nuxt-img :src="branch.thumbnail.url" class="h-full object-contain" />
+            <div class="absolute -bottom-7 pb-14 flex flex-col text-center w-full pt-3 bg-gradient-to-t from-default-900 to-transparent">
+              <p class="font-bold drop-shadow-lg text-white">{{ branch.name }}</p>
+              <p class="text-sm font-semibold shadow-lg text-white">{{ branch.address.shortcut_full_address }}</p>
+            </div>
           </Slide>
           <template #addons="{ slidesCount }">
             <Pagination />

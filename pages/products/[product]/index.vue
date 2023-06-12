@@ -26,7 +26,17 @@ if (error.value) {
 
 <template>
   <NuxtLayout name="product-collection">
-    <div class="mx-auto container px-3 lg:px-10 py-10 flex flex-col gap-10">
+    <div class="mx-auto container px-3 lg:px-7 p-7 flex flex-col gap-10">
+      <Breadcrumb :items="[
+        { 
+          label: product.product_group.name, 
+          to: { name: 'product-groups-productGroup', params: { productGroup: product.product_group.slug } } 
+        },
+        { 
+          label: product.brand.name, 
+          to: { name: 'brands-brand', params: { brand: product.brand.slug } } 
+        },
+      ]" />
       <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
         <ProductThumbnailSlider :images="[
           product.thumbnail.url,
@@ -111,7 +121,7 @@ if (error.value) {
             </template>
           </Carousel>
 
-          <Carousel :items-to-show="4" snap-align="start" class="hidden md:block -mx-3 relative lg:-mx-10">
+          <Carousel :items-to-show="4" snap-align="start" class="hidden md:block -mx-3 relative lg:-mx-7">
             <Slide v-for="variantProduct in product.variants" :key="variantProduct.id"
               class="border-t border-b border-l last:border-r border-default-100"
             >

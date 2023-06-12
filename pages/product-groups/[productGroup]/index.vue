@@ -54,6 +54,12 @@ watch([filter, sorter], async () => {
 <template>
   <NuxtLayout name="product-collection">
     <div class="px-3 lg:px-7 p-7">
+      <Breadcrumb class="mb-7" :items="[
+        {
+          label: 'Sản phẩm',
+          to: { name: 'products' }
+        }
+      ]" />
       <h1 class="text-3xl flex gap-3 flex-col sm:flex-row sm:items-center font-bold text-default-700">{{ productGroup.name }}
         <div class="sm:ml-auto -mr-3 lg:-mr-7">
           <ProductSorter v-model="sorter" />

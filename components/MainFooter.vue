@@ -21,7 +21,7 @@
         <div class="flex flex-col text-default-100 gap-5 text-sm">
           <h3 class="font-extrabold">Giới thiệu</h3>
           <nav class="flex flex-col gap-2">
-            <NuxtLink class="hover:underline">
+            <NuxtLink class="hover:underline" :to="{ name: 'about-us' }">
               Về chúng tôi
             </NuxtLink>
             <NuxtLink class="hover:underline" :to="{ name: 'products' }">
@@ -39,10 +39,10 @@
         <div class="flex flex-col text-default-100 gap-5 text-sm">
           <h3 class="font-extrabold">Điều khoản</h3>
           <nav class="flex flex-col gap-2">
-            <NuxtLink class="hover:underline">
+            <NuxtLink class="hover:underline" :to="{ name: 'terms-of-use' }">
               Điều khoản sử dụng
             </NuxtLink>
-            <NuxtLink class="hover:underline">
+            <NuxtLink class="hover:underline" :to="{ name: 'privacy-policy' }">
               Chính sách bảo mật
             </NuxtLink>
           </nav>

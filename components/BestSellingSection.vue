@@ -23,97 +23,99 @@ const { data: bestSellingProducts, error } = await useAsyncData<any>('bestSellin
     <section class="container mx-auto px-3 py-14 flex flex-col gap-6">
     
       <h3 class="font-extrabold text-2xl xs:text-3xl text-default-700 justify-center flex items-center gap-2 leading-7 relative">
-        <Icon name="noto:fire" class="w-10 h-10 text-danger-500 tracking-wider" />
+        <Icon name="noto:fire" class="w-10 h-10 text-danger-500" />
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-600 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0)]">Sản phẩm bán chạy</span>
       </h3>
 
-      <Carousel :items-to-show="1.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="block rounded-xl overflow-hidden bg-white md:hidden shadow-xl">
-        <Slide v-for="product in bestSellingProducts" :key="product.id"
-          class="border-l last:border-r border-default-100"
-        >
-          <ProductVerticalItem
-            class="p-7 hover:bg-primary-50"
-            :key="product.id"
-            :id="product.id"
-            :slug="product.slug"
-            :thumbnail="product.thumbnail?.url"
-            :name="product.name"
-            :sale-price="product.sale_price"
-            thumbnail-style="bg-transparent"
-            :can-add-to-cart="true"
-          />
-        </Slide>
+      <div class="border border-default-200 rounded-xl">
+        <Carousel :items-to-show="1.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="block rounded-xl overflow-hidden bg-white md:hidden shadow-xl">
+          <Slide v-for="product in bestSellingProducts" :key="product.id"
+            class="border-l last:border-r border-default-100"
+          >
+            <ProductVerticalItem
+              class="p-7 hover:bg-primary-50"
+              :key="product.id"
+              :id="product.id"
+              :slug="product.slug"
+              :thumbnail="product.thumbnail?.url"
+              :name="product.name"
+              :sale-price="product.sale_price"
+              thumbnail-style="bg-transparent"
+              :can-add-to-cart="true"
+            />
+          </Slide>
 
-        <template #addons="{ slidesCount }">
-          <Navigation v-if="slidesCount > 1" />
-        </template>
-      </Carousel>
+          <template #addons="{ slidesCount }">
+            <Navigation v-if="slidesCount > 1" />
+          </template>
+        </Carousel>
 
-      <Carousel :items-to-show="2.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="2.5" class="hidden rounded-xl overflow-hidden md:block bg-white lg:hidden shadow-xl">
-        <Slide v-for="product in bestSellingProducts" :key="product.id"
-          class="border-l last:border-r border-default-100"
-        >
-          <ProductVerticalItem
-            class="p-7 hover:bg-primary-50"
-            :key="product.id"
-            :id="product.id"
-            :slug="product.slug"
-            :thumbnail="product.thumbnail?.url"
-            :name="product.name"
-            :sale-price="product.sale_price"
-            thumbnail-style="bg-transparent"
-            :can-add-to-cart="true"
-          />
-        </Slide>
+        <Carousel :items-to-show="2.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="2.5" class="hidden rounded-xl overflow-hidden md:block bg-white lg:hidden shadow-xl">
+          <Slide v-for="product in bestSellingProducts" :key="product.id"
+            class="border-l border-default-100"
+          >
+            <ProductVerticalItem
+              class="p-7 hover:bg-primary-50"
+              :key="product.id"
+              :id="product.id"
+              :slug="product.slug"
+              :thumbnail="product.thumbnail?.url"
+              :name="product.name"
+              :sale-price="product.sale_price"
+              thumbnail-style="bg-transparent"
+              :can-add-to-cart="true"
+            />
+          </Slide>
 
-        <template #addons="{ slidesCount }">
-          <Navigation v-if="slidesCount > 1" />
-        </template>
-      </Carousel>
+          <template #addons="{ slidesCount }">
+            <Navigation v-if="slidesCount > 1" />
+          </template>
+        </Carousel>
 
-      <Carousel :items-to-show="3.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="hidden rounded-xl overflow-hidden lg:block bg-white xl:hidden shadow-xl">
-        <Slide v-for="product in bestSellingProducts" :key="product.id"
-          class="border-l last:border-r border-default-100"
-        >
-          <ProductVerticalItem
-            class="p-7 hover:bg-primary-50"
-            :key="product.id"
-            :id="product.id"
-            :slug="product.slug"
-            :thumbnail="product.thumbnail?.url"
-            :name="product.name"
-            :sale-price="product.sale_price"
-            thumbnail-style="bg-transparent"
-            :can-add-to-cart="true"
-          />
-        </Slide>
+        <Carousel :items-to-show="3.5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" :items-to-scroll="1.5" class="hidden rounded-xl overflow-hidden lg:block bg-white xl:hidden shadow-xl">
+          <Slide v-for="product in bestSellingProducts" :key="product.id"
+            class="border-l last:border-r border-default-100"
+          >
+            <ProductVerticalItem
+              class="p-7 hover:bg-primary-50"
+              :key="product.id"
+              :id="product.id"
+              :slug="product.slug"
+              :thumbnail="product.thumbnail?.url"
+              :name="product.name"
+              :sale-price="product.sale_price"
+              thumbnail-style="bg-transparent"
+              :can-add-to-cart="true"
+            />
+          </Slide>
 
-        <template #addons="{ slidesCount }">
-          <Navigation v-if="slidesCount > 1" />
-        </template>
-      </Carousel>
+          <template #addons="{ slidesCount }">
+            <Navigation v-if="slidesCount > 1" />
+          </template>
+        </Carousel>
 
-      <Carousel :items-to-show="6" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" class="hidden rounded-xl overflow-hidden bg-white xl:block shadow-xl">
-        <Slide v-for="product in bestSellingProducts" :key="product.id"
-          class="border-l last:border-r border-default-100"
-        >
-          <ProductVerticalItem
-            class="p-7 hover:bg-primary-50"
-            :key="product.id"
-            :id="product.id"
-            :slug="product.slug"
-            :thumbnail="product.thumbnail?.url"
-            :name="product.name"
-            :sale-price="product.sale_price"
-            thumbnail-style="bg-transparent"
-            :can-add-to-cart="true"
-          />
-        </Slide>
+        <Carousel :items-to-show="5" snap-align="start" :pause-autoplay-on-hover="true" :wrap-around="true" class="hidden rounded-xl overflow-hidden bg-white xl:block shadow-xl">
+          <Slide v-for="product in bestSellingProducts" :key="product.id"
+            class="border-l last:border-r border-default-200"
+          >
+            <ProductVerticalItem
+              class="p-7 hover:bg-primary-50"
+              :key="product.id"
+              :id="product.id"
+              :slug="product.slug"
+              :thumbnail="product.thumbnail?.url"
+              :name="product.name"
+              :sale-price="product.sale_price"
+              thumbnail-style="bg-transparent"
+              :can-add-to-cart="true"
+            />
+          </Slide>
 
-        <template #addons="{ slidesCount }">
-          <Navigation v-if="slidesCount > 1" />
-        </template>
-      </Carousel>
+          <template #addons="{ slidesCount }">
+            <Navigation v-if="slidesCount > 1" />
+          </template>
+        </Carousel>
+      </div>
     </section>
   </div>
 </template>

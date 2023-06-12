@@ -5,6 +5,8 @@ const { data: productGroups } = useAsyncData<any>('product-groups',
     { created_at: 'asc' }
   )).data.data
 )
+
+const route = useRoute()
 </script>
 
 <template>

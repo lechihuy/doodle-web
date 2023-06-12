@@ -53,6 +53,12 @@ watch([filter, sorter], async () => {
 <template>
   <NuxtLayout name="product-collection">
     <div class="px-3 lg:px-7 p-7">
+      <Breadcrumb class="mb-7" :items="[
+        { 
+          label: brand.product_group.name, 
+          to: { name: 'product-groups-productGroup', params: { productGroup: brand.product_group.slug } } 
+        },
+      ]" />
       <nuxt-img :src="brand.thumbnail?.url" class="w-32 h-32 rounded-lg border border-default-300 mb-5" />
       <h1 class="text-3xl flex gap-3 flex-col sm:flex-row sm:items-center font-bold text-default-700">{{ brand.name }}
         <div class="sm:ml-auto -mr-3 lg:-mr-7">

@@ -84,7 +84,9 @@ async function logout() {
           </NuxtLink>
 
           <NuxtLink
+            :to="{ name: 'about-us' }"
             class="cursor-pointer text-default-700 font-semibold hover:text-primary-500 hidden lg:block"
+            exact-active-class="text-primary-500"
           >
             Về chúng tôi
           </NuxtLink>
