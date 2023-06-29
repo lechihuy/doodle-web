@@ -149,8 +149,8 @@ async function submitCreateAddress() {
         <div class="py-7 flex flex-col gap-2">
           <label for="coordinates" class="font-semibold">Tọa độ</label>
           <FormCoordinatesInput
-            lat-input-id="address.lat"
-            lng-input-id="address.lng"
+            lat-input-id="lat"
+            lng-input-id="lng"
             v-model="coordinates"
             id="coordinates"
             :address="ref({
