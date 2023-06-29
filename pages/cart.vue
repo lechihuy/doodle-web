@@ -30,6 +30,7 @@ async function checkout() {
   await useCheckoutApi()
     .then((res) => {
       useToast().success('Đặt hàng thành công!')
+      changeRealtimeOrderTracking(res.data.code, "pending");
       navigateTo({ name: 'orders-id', params: { id: res.data.data.id } })
     })
 }
