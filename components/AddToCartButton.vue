@@ -37,6 +37,8 @@ async function addToCart() {
         useNotEnoughStockModal().open();
       } else if (err.response.status === 404) {
         useNotEnoughStockModal().open('OUT_OF_STOCK');
+      } else if (err.response.statis === 400) {
+        navigateTo({ name: 'cart' })
       }
     })
     .finally(() => (addToCartLoading.value = false));
